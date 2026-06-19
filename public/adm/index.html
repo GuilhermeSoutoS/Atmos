@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Atmos | Home</title>
+  <link rel="icon" href="../assets/icons/favicon.ico" />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body onload="listar(); puxarKpi(); listarRecentes(); listarServidoresRecentes();" class="corpo-admin">
+  <div class="estrutura-admin">
+    <aside class="menu-lateral">
+      <a class="logo-admin" href="index.html"><span class="ponto-logo"></span>ATMOS</a>
+      <span class="titulo-menu">MENU</span>
+      <nav class="menu-nav">
+        <a href="index.html" class="active"><span class="ponto-nav"></span>Home</a>
+        <a href="empresas.html"><span class="ponto-nav"></span>Empresas</a>
+        <a href="colaboradores.html"><span class="ponto-nav"></span>Colaboradores</a>
+        <a href="servidores.html"><span class="ponto-nav"></span>Servidores</a>
+      </nav>
+      <div class="usuario-menu">
+        <div class="avatar-admin">G</div>
+        <div>
+          <strong>Geraldo Atmos</strong><br>
+          <small>geraldo_adm@atmos.com</small>
+        </div>
+      </div>
+    </aside>
+
+    <main class="conteudo-admin">
+      <div class="topo-admin">
+        <div><h1>Home</h1></div>
+        <div class="acoes-admin">
+          <a class="btn-admin" href="empresas.html">Cadastrar empresa</a>
+        </div>
+      </div>
+
+      <section class="grade-indicadores">
+        <div class="card-indicador">
+          <div class="rotulo-indicador">Empresas</div>
+          <div class="valor-indicador" id="kpiEmpresas"></div>
+          <div class="meta-indicador">Cadastradas</div>
+        </div>
+        <div class="card-indicador">
+          <div class="rotulo-indicador">Colaboradores</div>
+          <div class="valor-indicador" id="kpiColaboradores"></div>
+          <div class="meta-indicador">Ativos</div>
+        </div>
+        <div class="card-indicador">
+          <div class="rotulo-indicador">Servidores</div>
+          <div class="valor-indicador" id="kpiServidores"></div>
+          <div class="meta-indicador">Monitorados</div>
+        </div>
+      </section>
+
+      <section class="grade-cards">
+        <div class="painel">
+          <div class="cabecalho-secao">
+            <div><h2>Acesso rápido</h2></div>
+          </div>
+          <div class="lista-atalhos">
+            <a class="link-atalho" href="empresas.html"><span>Cadastrar empresa</span><strong>→</strong></a>
+            <a class="link-atalho" href="colaboradores.html"><span>Cadastrar colaborador</span><strong>→</strong></a>
+            <a class="link-atalho" href="servidores.html"><span>Cadastrar servidor</span><strong>→</strong></a>
+          </div>
+        </div>
+
+        <section class="painel-tabela">
+          <div class="cabecalho-tabela">
+            <div><h2>Empresas recentes</h2></div>
+          </div>
+          <div class="envolve-tabela">
+            <table class="tabela-admin">
+              <thead>
+                <tr>
+                  <th>Empresa</th>
+                  <th>Responsável</th>
+                  <th>Cidade / UF</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="tabelaEmpresas">
+                <!-- <tr>
+                  <td>Atmos Monitoring Systems</td>
+                  <td>Geraldo Atmos</td>
+                  <td>São Paulo / SP</td>
+                  <td><span class="etiqueta success">Operando</span></td>
+                </tr>
+                <tr>
+                  <td>Cloud Aurora</td>
+                  <td>Marina Torres</td>
+                  <td>Campinas / SP</td>
+                  <td><span class="etiqueta success">Operando</span></td>
+                </tr>
+                <tr>
+                  <td>Sky Pulse</td>
+                  <td>Rafael Mendes</td>
+                  <td>Curitiba / PR</td>
+                  <td><span class="etiqueta success">Operando</span></td>
+                </tr> -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </section>
+
+      <section class="painel-tabela" style="margin-top: 16px;">
+        <div class="cabecalho-tabela">
+          <div><h2>Servidores recentes</h2></div>
+        </div>
+        <div class="envolve-tabela">
+          <table class="tabela-admin">
+            <thead>
+              <tr>
+                <th>Servidor</th>
+                <th>IP</th>
+                <th>Sistema</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="tabelaServidoresRecentes">
+              <!-- <tr>
+                <td>srv-api-clima-01</td>
+                <td>10.20.5.14</td>
+                <td>Ubuntu 24.04</td>
+                <td><span class="etiqueta info">Estável</span></td>
+              </tr>
+              <tr>
+                <td>srv-db-core-02</td>
+                <td>10.20.5.21</td>
+                <td>Debian 12</td>
+                <td><span class="etiqueta info">Observação</span></td>
+              </tr>
+              <tr>
+                <td>srv-gateway-03</td>
+                <td>10.20.5.30</td>
+                <td>Windows Server</td>
+                <td><span class="etiqueta info">Estável</span></td>
+              </tr> -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="../assets/javascript/admin.js"></script>
+  <script>
+    var listaEmpresasCadastradas = [];
+    function listar(){
+      fetch("/empresas/listar", {
+        method: "GET", 
+      }).then(function (resposta){
+        resposta.json().then((empresas) => {
+          empresas.forEach((empresa) => {
+            listaEmpresasCadastradas.push(empresa);
+            console.log("listaEmpresasCadastradas");
+          })
+        })
+      }).catch(function(resposta){
+        console.log(`erro ${resposta}`)
+      })
+    }
+
+    function puxarKpi(){
+      fetch("/empresas/listar").then(function (res){
+        return res.json();
+      }).then(function (empresas){
+        document.getElementById("kpiEmpresas").innerText = empresas.length;
+
+      fetch("/usuarios/listarColaboradoresCadastrados").then(function (res){
+        return res.json();
+      }).then(function (colaboradores){
+        document.getElementById("kpiColaboradores").innerText = colaboradores.length;
+
+       fetch("/servidores/listarServidores").then(function (res){
+        return res.json();
+      }).then(function (servidores){
+        document.getElementById("kpiServidores").innerText = servidores.length;
+      })
+      })
+      })
+    }
+
+    function listarRecentes(){
+      fetch("/empresas/listarRecentes").then(function(res){
+        return res.json();
+      }).then(function(empresas){
+        var lista = document.getElementById("tabelaEmpresas");
+        if(empresas.length == 0){
+          lista.innerHTML = "<p> Nenhuma empresa cadastrada </p>"
+          return;
+        }
+        var tabela = "";
+        for (var i = 0; i < empresas.length; i++){
+          tabela += 
+          `
+            <tr>
+                  <td>${empresas[i].razaoSocial}</td>
+                  <td>${empresas[i].nomeResponsavel}</td>
+                  <td>${empresas[i].cidade}/${empresas[i].uf}</td>
+                  <td><span class="etiqueta success">${empresas[i].statusEmpresa}</span></td>
+                </tr>
+          `;
+        }
+        lista.innerHTML = tabela; 
+      })
+    }
+
+    function listarServidoresRecentes(){
+      fetch("/servidores/listarServidoresRecentes").then(function(res){
+        return res.json();
+      }).then(function(servidores){
+        var listaServidores = document.getElementById("tabelaServidoresRecentes");
+        if (servidores.length == 0){
+          listaServidores.innerHTML = "<p> Nenhum servidor cadastrado </p>"
+          return
+        }
+        var tabelaServidores = "";
+        for (var i = 0; i < servidores.length; i++){
+          tabelaServidores += `
+            <tr>
+                <td>${servidores[i].nomeIdentificacao}</td>
+                <td>${servidores[i].enderecoIPV4}</td>
+                <td>${servidores[i].sistemaOperacional}</td>
+                <td><span class="etiqueta info">${servidores[i].statusServidor}</span></td>
+              </tr>
+          `
+        }
+        listaServidores.innerHTML = tabelaServidores;
+      })
+    }
+  </script>
+</body>
+</html>

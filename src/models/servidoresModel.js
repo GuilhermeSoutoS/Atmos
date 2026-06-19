@@ -1,13 +1,13 @@
 var database = require("../database/config")
 
 
-function cadastrar(nomeServidor, numeroIdentificacao, sistemaOperacional,enderecoIP, fkEmpresa) {
-    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nomeServidor, numeroIdentificacao, sistemaOperacional,enderecoIP, fkEmpresa);
-    
+function cadastrar(nomeIdentificacao, numeroIdentificacao, sistemaOperacional, enderecoIPV4, fkEmpresa) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nomeIdentificacao, numeroIdentificacao, sistemaOperacional, enderecoIPV4, fkEmpresa);
+
     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
     //  e na ordem de inserção dos dados.
     var instrucaoSql = `
-        INSERT INTO servidor (fkEmpresa, nome, numeroIdentificacao, sistemaOperacional,enderecoIP) VALUES (${fkEmpresa},'${nomeServidor}','${numeroIdentificacao}','${sistemaOperacional}','${enderecoIP}');
+        INSERT INTO servidor (fkEmpresa, nomeIdentificacao, numeroIdentificacao, sistemaOperacional,enderecoIPV4) VALUES (${fkEmpresa},'${nomeIdentificacao}','${numeroIdentificacao}','${sistemaOperacional}','${enderecoIPV4}');
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -30,8 +30,54 @@ function cadastrarComponentes(Componentes, fkEmpresa, fkServidor) {
     return Promise.all(promises);
 }
 
+function listarServidores() {
+    var instrucaoSql = "SELECT * FROM servidor";
+    return database.executar(instrucaoSql);
+}
+
+function listarServidoresRecentes() {
+    var instrucaoSql = `
+    SELECT idServidor, nomeIdentificacao, enderecoIPV4, sistemaOperacional, statusServidor
+    FROM servidor
+    order by idServidor desc limit 3;
+    `;
+    return database.executar(instrucaoSql);
+}
+
+function listarServidoresCadastrados() {
+    var instrucaoSql = `
+    SELECT idServidor, nomeIdentificacao, enderecoIPV4, sistemaOperacional, razaoSocial, statusServidor
+    FROM servidor LEFT JOIN empresa on idEmpresa = fkEmpresa
+    order by idServidor desc;
+    `;
+    return database.executar(instrucaoSql);
+}
+
+function cadastrarServidor(servidorNome, servidorIdentificacao, servidorIp, servidorSo, idEmpresa, servidorStatus) {
+    var instrucaoSql = `
+     INSERT INTO servidor (nomeIdentificacao, numeroIdentificacao, enderecoIPV4, sistemaOperacional, fkEmpresa, statusServidor) 
+     VALUES ('${servidorNome}', '${servidorIdentificacao}', '${servidorIp}', '${servidorSo}', '${idEmpresa}', '${servidorStatus}');
+    `
+    return database.executar(instrucaoSql);
+}
+
+function buscarQtdAlertasNoUltimoMes(idEmpresa) {
+    var instrucaoSql = `
+    SELECT 
+        DATE_FORMAT(dataHora, '%Y-%m') AS mes,
+        COUNT(*) AS total_alertas
+    FROM alerta WHERE fkEmpresa = 1
+    GROUP BY mes ORDER BY mes DESC LIMIT 1;
+    SELECT COUNT(idServidor) FROM servidor where fkEmpresa = ${idEmpresa};
+    `
+    return database.executar(instrucaoSql);
+}
 
 module.exports = {
     cadastrar,
-    cadastrarComponentes
+    cadastrarComponentes,
+    listarServidores,
+    listarServidoresRecentes,
+    listarServidoresCadastrados,
+    cadastrarServidor
 };

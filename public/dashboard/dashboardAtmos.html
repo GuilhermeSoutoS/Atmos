@@ -4,69 +4,844 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Title -->
   <title>Dashboard - Atmos</title>
+
+  <!-- Styles -->
   <link rel="stylesheet" href="../assets/css/dashboard.css">
+  <link rel="stylesheet" href="../assets/css/dashboard/dashboardAtmos.css">
+
+  <!-- Script -->
+
+  <!-- Flavicon -->
   <link rel="icon" href="../assets/icons/favicon.ico" type="image/x-icon" />
+
+  <!--Google Fonts-->
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet" />
+
+  <!-- ChartJS -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- HeatMap -->
+  <link rel="stylesheet" href="https://unpkg.com/cal-heatmap/dist/cal-heatmap.css">
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="https://unpkg.com/cal-heatmap/dist/cal-heatmap.min.js"></script>
+  <script src="https://unpkg.com/cal-heatmap/dist/plugins/LegendLite.min.js"></script>
+  <script src="https://unpkg.com/@popperjs/core@2"></script>
+  <script src="https://unpkg.com/cal-heatmap/dist/plugins/Tooltip.min.js"></script>
 </head>
 
-<body>
+<div id="editorModal"
+  style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:999;">
 
-  <nav class="sidebar">
-    <div class="logo-container">
-      <a href="../index.html" class="logo">ATMOS</a>
+  <div style="background:#fff; width:80%; max-width:900px; margin:5% auto; padding:20px; border-radius:10px;">
+
+    <h2>Criar Relatório</h2>
+
+    <div id="editorTexto" contenteditable="true"
+      style="border:1px solid #ccc; min-height:300px; padding:10px; margin-top:10px;">
     </div>
 
-    <ul class="nav-links">
-
-      <li class="nav-item"> <a href="#">
-          <img src="../assets/images/pc.svg" class="icon" alt="">
-          <span>Overview</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a href="#">
-          <img src="../assets/images/alert.svg" class="icon" alt="">
-          <span>Alertas</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a href="/cadastro_servidor.html">
-          <img src="../assets/images/server.svg" class="icon" alt="">
-          <span>Servidores</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a href="/cadastro_funcionario.html">
-          <img src="../assets/images/user.svg" class="icon" alt="">
-          <span>Usuários</span>
-        </a>
-      </li>
-    </ul>
-
-    <div class="info-user">
-        <h3><span id="usuarionome">usuário</span></h3>
-        <h5><span id="usuarioemail">email</span></h3>
-    </div>
-
-  </nav>
-
-  <div class="container-dash">
-
-    <div class="info-dash">
-      <p>Sistema / Monitoramento</p>
-      
+    <div style="margin-top:15px; display:flex; gap:10px;">
+      <button onclick="exportarRelatorioPDF()">Exportar PDF</button>
+      <button onclick="fecharEditor()">Fechar</button>
     </div>
 
   </div>
+</div>
 
+<body>
+  <nav class="sidebar" id="siderbar">
+    <div class="logo-container">
+      <a href="./dashboardAtmos.html" class="logo">
+        <div class="cicle"></div>
+        <span>ATMOS</span>
+      </a>
+    </div>
 
+    <ul class="nav-links">
+      <ul>
+        <li class="nav-category">
+          <span>PRINCIPAL</span>
+        </li>
+        <li class="nav-item nav-item-active area-contribuidor">
+          <a href="./dashboardAtmos.html">
+            <img src="../assets/images/pc.svg" class="icon" alt="">
+            <span>Home</span>
+          </a>
+        </li>
+        <li class="nav-item nav-item-active area-gestor">
+          <a href="./dashboardAtmosGerente.html">
+            <img src="../assets/images/pc.svg" class="icon" alt="">
+            <span>Home</span>
+          </a>
+        </li>
+        <li class="nav-item area-contribuidor">
+          <a href="./dashboardAlertas.html">
+            <img src="../assets/images/alert.svg" class="icon" alt="">
+            <span>Alertas</span>
+          </a>
+        </li>
+        <li class="nav-item area-gestor">
+          <a href="./dashboardAlertasGerente.html">
+            <img src="../assets/images/alert.svg" class="icon" alt="">
+            <span>Alertas</span>
+          </a>
+        </li>
+        <li class="nav-item area-gestor">
+          <a href="./dashboardRelatorios.html">
+            <img src="../assets/images/documentos.svg" class="icon" alt="">
+            <span>Relatorios</span>
+          </a>
+        </li>
+      </ul>
+      <ul>
+        <li class="nav-category">
+          <span>INFRAESTRUTURA</span>
+        </li>
+        <li class="nav-item">
+          <a href="./dashboardServidor.html">
+            <img src="../assets/images/server.svg" class="icon" alt="">
+            <span>Servidores</span>
+          </a>
+        </li>
+        <li class="nav-item area-gestor">
+          <a href="./dashboardEquipe.html">
+            <img src="../assets/images/user.svg" class="icon" alt="">
+            <span>Equipe</span>
+          </a>
+        </li>
+      </ul>
+    </ul>
 
+    <div class="info-user" onclick="window.location.href = './dashboardPerfil.html'">
+      <div class="img-user" id="usarioimagem">
+        <img alt="A">
+      </div>
+      <div>
+        <h3><span id="usuarionome">usuário</span></h3>
+        <h5><span id="usuarioemail">email</span></h3>
+      </div>
+    </div>
+
+    <!--Menu mobile-->
+    <div class="menu" style="display: none" id="menu">
+      <div class="menu-container" id="menu-mobile">
+        <ul>
+          <ul>
+            <li class="nav-category">
+              <span>PRINCIPAL</span>
+            </li>
+            <li class="nav-item nav-item-active area-contribuidor">
+              <a href="./dashboardAtmos.html">
+                <img src="../assets/images/pc.svg" class="icon" alt="">
+                <span>Home</span>
+              </a>
+            </li>
+            <li class="nav-item nav-item-active area-gestor">
+              <a href="./dashboardAtmosGerente.html">
+                <img src="../assets/images/pc.svg" class="icon" alt="">
+                <span>Home</span>
+              </a>
+            </li>
+            <li class="nav-item area-contribuidor">
+              <a href="./dashboardAlertas.html">
+                <img src="../assets/images/alert.svg" class="icon" alt="">
+                <span>Alertas</span>
+              </a>
+            </li>
+
+            <li class="nav-item area-gestor">
+              <a href="./dashboardAlertasGerente.html">
+                <img src="../assets/images/alert.svg" class="icon" alt="">
+                <span>Alertas</span>
+              </a>
+            </li>
+
+            <li class="nav-item area-gestor">
+              <a href="./dashboardRelatorios.html">
+                <img src="../assets/images/documentos.svg" class="icon" alt="">
+                <span>Relatorios</span>
+              </a>
+            </li>
+          </ul>
+          <ul>
+            <li class="nav-category">
+              <span>INFRAESTRUTURA</span>
+            </li>
+            <li class="nav-item">
+              <a href="./dashboardServidor.html">
+                <img src="../assets/images/server.svg" class="icon" alt="">
+                <span>Servidores</span>
+              </a>
+            </li>
+            <li class="nav-item area-gestor">
+              <a href="./dashboardEquipe.html">
+                <img src="../assets/images/user.svg" class="icon" alt="">
+                <span>Equipe</span>
+              </a>
+            </li>
+          </ul>
+          <ul>
+            <li class="nav-category">
+              <span>Usuário</span>
+            </li>
+            <li class="nav-item ">
+              <a href="./dashboardPerfil.html">
+                <img src="../assets/images/user.svg" class="icon" alt="">
+                <span>Perfil</span>
+              </a>
+            </li>
+          </ul>
+        </ul>
+      </div>
+    </div>
+    <!-- Menu Icon -->
+    <div class="container-menu">
+      <div class="menu-icon" id="menu-icon">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+
+  </nav>
+  <main>
+
+    <header>
+      <div class="infos">
+        <div class="screen-title">
+          <ul class="breadcrumb">
+            <li><a href="#">Principal</a></li>
+            <li><a href="#"><span>Overview</span></a></li>
+          </ul>
+        </div>
+        <div class="screen-infos">
+          <div><span></span>Sistema Operacional</div>
+          <span id="dataSistema"></span>
+        </div>
+      </div>
+      <div class="tela">
+        <div>
+          <h1>Dashboard de Monitoramento</h1>
+          <span>Visão consolidada da Infraestrutura em tempo real</span>
+        </div>
+        <div class="acoes">
+          <button class="btn-azul" onclick="abrirEditorRelatorio()">
+            <img src="../assets/images/icones/iconeAdd.svg" alt="add icon">RELATÓRIO
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <section>
+      <div class="card card-servidores">
+        <div>
+          <h3>Servidores em atenção</h3>
+          <span>Últimos dados de Monitoramento</span>
+        </div>
+        <div class="conteudo conteudo-servidor">
+          <table class="tabela-servidores">
+            <thead>
+              <tr>
+                <th>Status</th>
+                <th>Nome</th>
+                <th>CPU</th>
+                <th>RAM</th>
+                <th>Disco</th>
+                <th>Melhoria</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="tabela_relatorios_gestor">
+              <tr>
+                <td><span class="etiqueta-bold etiqueta-vermelha">● Critico</span></td>
+                <td><span class="nome-servidor">LAPTOP-LUANA</span>
+                  <span class="servidor-id">#luana</span>
+                </td>
+
+                <td>
+                  <div class="container-barra">
+                    <div class="barra">
+                      <div class="preenchimento" style="width: 48.08%; background: #3879fc"></div>
+                    </div>
+                    <span>48.08%</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="container-barra">
+                    <div class="barra">
+                      <div class="preenchimento" style="width: 93.34%; background: #fc3838"></div>
+                    </div>
+                    <span>93.34%</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="container-barra">
+                    <div class="barra">
+                      <div class="preenchimento" style="width: 89%; background: #fcd838"></div>
+                    </div>
+                    <span> 89%</span>
+                  </div>
+                </td>
+                <td>RAM - DISCO</td>
+                <td>
+                  <!-- <button class="btn-detalhes" onclick="detalhesServidor(5)">Detalhes</button> -->
+                  <button class="btn-azul" onclick="baixarRelatorio()">Relatorio</button>
+                  <!-- <button class="btn-remover" onclick="removerServidor(5)">Remover</button> -->
+                </td>
+              </tr>
+
+              <tr>
+                <td><span class="etiqueta-bold etiqueta-vermelha">● Critico</span></td>
+                <td><span class="nome-servidor">LAPTOP-LUIZ</span>
+                  <span class="servidor-id">#Luiz</span>
+                </td>
+
+                <td>
+                  <div class="container-barra">
+                    <div class="barra">
+                      <div class="preenchimento" style="width: 15.8%; background: #3879fc"></div>
+                    </div>
+                    <span>15.8%</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="container-barra">
+                    <div class="barra">
+                      <div class="preenchimento" style="width: 92.23%; background: #fc3838"></div>
+                    </div>
+                    <span>92.23%</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="container-barra">
+                    <div class="barra">
+                      <div class="preenchimento" style="width: 78.7%; background: #3879fc"></div>
+                    </div>
+                    <span> 78.7%</span>
+                  </div>
+                </td>
+                <td>RAM</td>
+                <td>
+                  <!-- <button class="btn-detalhes" onclick="detalhesServidor(2)">Detalhes</button> -->
+                  <button class="btn-azul" onclick="baixarRelatorio()">Relatorio</button>
+                  <!-- <button class="btn-remover" onclick="removerServidor(2)">Remover</button> -->
+                </td>
+              </tr>
+
+              <tr>
+                <td><span class="etiqueta-bold etiqueta-amarela">● Atenção</span></td>
+                <td><span class="nome-servidor">LAPTOP-NZ13</span>
+                  <span class="servidor-id">#kaio</span>
+                </td>
+
+                <td>
+                  <div class="container-barra">
+                    <div class="barra">
+                      <div class="preenchimento" style="width: 14.3%; background: #fcd838"></div>
+                    </div>
+                    <span>14.3%</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="container-barra">
+                    <div class="barra">
+                      <div class="preenchimento" style="width: 75.54%; background: #fcd838"></div>
+                    </div>
+                    <span>75.54%</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="container-barra">
+                    <div class="barra">
+                      <div class="preenchimento" style="width: 74.2%; background: #3879fc"></div>
+                    </div>
+                    <span> 74.2%</span>
+                  </div>
+                </td>
+                <td>CPU - RAM</td>
+                <td>
+                  <!-- <button class="btn-detalhes" onclick="detalhesServidor(4)">Detalhes</button> -->
+                  <button class="btn-azul" onclick="baixarRelatorio()">Relatorio</button>
+                  <!-- <button class="btn-remover" onclick="removerServidor(4)">Remover</button> -->
+                </td>
+              </tr>
+
+              <tr>
+                <td><span class="etiqueta-bold etiqueta-amarela">● Atenção</span></td>
+                <td><span class="nome-servidor">LAPTOP-MATHEUS</span>
+                  <span class="servidor-id">#Matheus</span>
+                </td>
+
+                <td>
+                  <div class="container-barra">
+                    <div class="barra">
+                      <div class="preenchimento" style="width: 9.72%; background: #fcd838"></div>
+                    </div>
+                    <span>9.72%</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="container-barra">
+                    <div class="barra">
+                      <div class="preenchimento" style="width: 68.91%; background: #3879fc"></div>
+                    </div>
+                    <span>68.91%</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="container-barra">
+                    <div class="barra">
+                      <div class="preenchimento" style="width: 74.9%; background: #3879fc"></div>
+                    </div>
+                    <span> 74.9%</span>
+                  </div>
+                </td>
+                <td>CPU</td>
+                <td>
+                  <!-- <button class="btn-detalhes" onclick="detalhesServidor(3)">Detalhes</button> -->
+                  <button class="btn-azul" onclick="baixarRelatorio()">Relatorio</button>
+                  <!-- <button class="btn-remover" onclick="removerServidor(3)">Remover</button> -->
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+        <div class="ver-mais">
+          <a href="./dashboardServidor.html">Ver mais</a>
+        </div>
+      </div>
+      <div class="card card-feed-alertas ">
+        <div>
+          <h3>Feed de Incidentes</h3>
+          <span>Últimos incidentes registrados em </span>
+        </div>
+        <div class="tabela-incidentes">
+          <table>
+            <thead>
+              <tr>
+                <th>Servidor</th>
+                <th>Componente</th>
+                <th>Status</th>
+                <th>Data</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <span class="etiqueta etiqueta-vermelha">laptop-LUANA</span>
+                </td>
+                <td>RAM</td>
+                <td>
+                  <span class="etiqueta etiqueta-vermelha">Não Resolvido</span>
+                </td>
+                <td>05/05 11:10</td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="etiqueta etiqueta-vermelha">laptop-LUIZ</span>
+                </td>
+                <td>RAM</td>
+                <td>
+                  <span class="etiqueta etiqueta-vermelha">Não Resolvido</span>
+                </td>
+                <td>05/05 11:05</td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="etiqueta etiqueta-vermelha">laptop-LUANA</span>
+                </td>
+                <td>Disco</td>
+                <td>
+                  <span class="etiqueta etiqueta-vermelha">Não Resolvido</span>
+                </td>
+                <td>05/05 10:50</td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="etiqueta etiqueta-laranja">laptop-NZ13</span>
+                </td>
+                <td>Processos</td>
+                <td>
+                  <span class="etiqueta etiqueta-vermelha">Não Resolvido</span>
+                </td>
+                <td>05/05 10:30</td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="etiqueta etiqueta-laranja">laptop-MATHEUS</span>
+                </td>
+                <td>RAM</td>
+                <td>
+                  <span class="etiqueta etiqueta-laranja">Andamento</span>
+                </td>
+                <td>05/05 10:55</td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="etiqueta etiqueta-laranja">laptop-NZ13</span>
+                </td>
+                <td>RAM</td>
+                <td>
+                  <span class="etiqueta etiqueta-laranja">Andamento</span>
+                </td>
+                <td>05/05 10:40</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- <div class="conteudo conteudo-feed">
+          <div class="alerta alerta-emergencia">
+            <div class="tipo-alerta">
+              <span class="bolinha-alerta bolinha-emergencia"></span>
+            </div>
+            <div class="desc-alerta">
+              <h5>SRV-HMLG : Offline</h5>
+              <span>há 3 min - 80% de utilização de CPU</span>
+            </div>
+          </div>
+        </div>
+        <div class="conteudo conteudo-feed">
+          <div class="alerta alerta-emergencia">
+            <div class="tipo-alerta">
+              <span class="bolinha-alerta bolinha-emergencia"></span>
+            </div>
+            <div class="desc-alerta">
+              <h5>SRV-HMLG : Offline</h5>
+              <span>há 3 min - 91% de utilização RAM </span>
+            </div>
+          </div>
+        </div> -->
+        <div class="ver-mais">
+          <a href="./dashboardAlertas.html">Ver mais</a>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="card card-gfc-infraestrutura">
+        <div>
+          <h3>Perfomance de Infraestrutura</h3>
+          <span>CPU - Rede - Incidentes</span>
+        </div>
+        <div class="area-select">
+          <!-- <select id="select_lista_servidores" onselect="trocarGrafico()">
+            
+          </select> -->
+          <select id="select_lista_servidores" onselect="trocarGrafico()">
+            <option value="5">laptop-LUANA</option>
+            <option value="2">laptop-LUIZ</option>
+            <option value="4">laptop-NZ13</option>
+            <option value="3">laptop-MATHEUS</option>
+            <option value="0">laptop-ANDERSON</option>
+            <option value="1">laptop-AURORA</option>
+          </select>
+        </div>
+        <div class="conteudo">
+          <div>
+            <canvas id="perfomaInfra" class="graf-infraestrutura"></canvas>
+          </div>
+        </div>
+      </div>
+      <div class="card card-heat-map">
+        <h3>Perfomance de Infraestrutura</h3>
+        <span>Mapa de quantidade de incidentes registrados</span>
+        <div class="conteudo conteudo-heatmap">
+          <div id="heatmap"></div>
+          <div class="legende-heatmap">
+            <span>Menos</span>
+            <div id="legenda-heatmap"></div>
+            <span>Mais</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- <section>
+      <div class="card card-heat-map">
+        <h3>Perfomance de Infraestrutura</h3>
+        <span>Mapa de quantidade de incidentes registrados</span>
+        <div class="conteudo conteudo-heatmap">
+          <div id="heatmap"></div>
+          <div class="legende-heatmap">
+            <span>Menos</span>
+            <div id="legenda-heatmap"></div>
+            <span>Mais</span>
+          </div>
+        </div>
+      </div>
+      <div class="card card-recursos ">
+        <h3>Recursos Dos Servidores</h3>
+        <span>Últimas ocorrências registradas</span>
+        <div class="area-select">
+          <select id="select_metricas_kpis">
+            <option value="cpu">CPU</option>
+            <option value="ram">RAM</option>
+            <option value="disco">DISCO</option>
+          </select>
+        </div>
+        <div class="conteudo-recursos">
+          <div class="kpi">
+            <h4 id="conteudo_recursos_legenda_1">Média</h4>
+            <p id="conteudo_recursos_kpi_1">50%</p>
+            <span></span>
+          </div>
+          <div class="kpi">
+            <h4 id="conteudo_recursos_legenda_2">Mediana</h4>
+            <p id="conteudo_recursos_kpi_2">50%</p>
+            <span></span>
+          </div>
+          <div class="kpi">
+            <h4 id="conteudo_recursos_legenda_3">Pico</h4>
+            <p id="conteudo_recursos_kpi_3">50%</p>
+            <span></span>
+          </div>
+        </div>
+      </div>
+    </section> -->
+
+    <section>
+      <!-- <div class="card card-servidores">
+        <h3>Servidores</h3>
+        <span>Últimos dados de Monitoramento</span>
+        <div class="conteudo conteudo-servidor" id="resulmoServidores">
+
+        </div>
+        <div class="ver-mais">
+          <a href="./dashboardServidor.html">Ver mais</a>
+        </div>
+      </div> -->
+      <div class="card card-status-servidores ">
+        <h3>Status dos Servidores</h3>
+        <span>Por status atual</span>
+        <div class="conteudo">
+          <div>
+            <canvas id="statusServidores" class="graf-status-servidores"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div class="modal" id="modal">
+    <div class="card-apresentacao">
+      <div class="titulo">
+        <h1>Olá, User, seja <span>muito bem-vindo!</span></h1>
+      </div>
+      <div class="conteudo">
+        <p>A <span>ATMOS</span> tem o prazer inigualável de dar as mais calorosas boas-vindas ao nosso inovador Software
+          de
+          Monitoramento. Este sistema foi desenvolvido para atender às crescentes necessidades do mercado.</p>
+        <p>O software oferece funcionalidades abrangentes, garantindo que usuários possam acompanhar, analisar e
+          otimizar suas operações com eficiência e eficácia. Nossa equipe dedicou tempo e esforço significativos para
+          criar uma solução que atenda às expectativas e ofereça uma experiência excepcional e intuitiva.</p>
+        <p>Acreditamos que este software será um grande aliado no cotidiano dos nossos clientes, proporcionando insights
+          valiosos e facilitando a tomada de decisões informadas. Vamos juntos explorar as possibilidades que este novo
+          software oferece!</p>
+      </div>
+      <div class="acoes">
+        <button onclick="fecharPopUp()">
+          Próximo
+        </button>
+      </div>
+    </div>
+  </div>
 </body>
 
 </html>
 
-<script>
-  usuarionome.innerHTML = sessionStorage.NOME_USUARIO
-  usuarioemail.innerHTML = sessionStorage.EMAIL_USUARIO
+<!-- Scripts Funcionais -->
+<script src="../assets/javascript/datetime.js"></script>
+<script src="../assets/javascript/menu.js"></script>
+<script src="../assets/javascript/sessao.js"></script>
 
+<!-- Graficos -->
+<script>
+  // grafico de Status dos Servidores
+  const statusServidores = document.getElementById("statusServidores")
+  new Chart(statusServidores, {
+    type: 'doughnut',
+    data: {
+      labels: ['Online', 'Atenção', "Offline"],
+      datasets: [{
+        label: 'Servidores',
+        data: [9, 2, 1],
+        borderWidth: 1,
+        backgroundColor: ["#02A44F", "#D77706", "#D92629"]
+      }],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+          grid: {
+            display: false
+          },
+          border: {
+            display: false,
+          },
+          ticks: {
+            display: false
+          }
+        },
+        x: {
+          grid: {
+            display: false
+          },
+          border: {
+            display: false
+          },
+          ticks: {
+            display: false
+          }
+        }
+      },
+      cutout: "70%",
+      responsive: true,
+      maintainAspectRatio: false
+    }
+  });
+</script>
+
+<!-- Heatmap -->
+<script>
+  const hoje = new Date();
+  const inicio = new Date(hoje.getFullYear(), hoje.getMonth() - 4, 1);
+  const cal = new CalHeatmap();
+  const data = [
+    { date: '2026-04-11', value: 1 },
+    { date: '2026-04-10', value: 0 },
+    { date: '2026-04-09', value: 3 },
+    { date: '2026-04-08', value: 4 },
+    { date: '2026-04-07', value: 5 },
+    { date: '2026-04-06', value: 1 },
+  ];
+  cal.paint({
+    itemSelector: "#heatmap",
+    date: {
+      start: inicio,
+      max: hoje // impede ir pra frente
+    },
+    range: 5,
+    verticalOrientation: false,
+    gutter: 0,
+    animationDuration: false,
+    domain: {
+      label: { position: 'top' },
+      type: 'month',
+    },
+    subDomain: {
+      type: 'ghDay',
+      radius: 2,
+      gutter: 4,
+      width: 13,
+      height: 13,
+    },
+    data: {
+      source: data,
+      x: 'date',
+      y: 'value'
+    },
+    scale: {
+      color: {
+        range: ['#E0E8F4', '#B3C7E3', '#80A6D2', '#4D85C1', '#1A64B0', '#00367A'],
+        domain: [0, 1, 2, 3, 4, 5]
+      }
+    },
+  },
+    [
+      [
+        Tooltip,
+        {
+          text: function (date, value, dayjsDate) {
+            return (
+              (value ? value + ' Incidentes' : 'Sem Incidentes') +
+              ' em ' +
+              formatarData(dayjsDate)
+            );
+          },
+        },
+      ],
+      [
+        LegendLite,
+        {
+          radius: 3,
+          itemSelector: '#legenda-heatmap',
+          width: 13,
+          height: 13,
+        }
+      ],
+
+    ]
+  )
+
+  function formatarData(timestamp) {
+    const meses = [
+      "janeiro", "fevereiro", "março", "abril", "maio", "junho",
+      "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"
+    ];
+    var data = new Date(timestamp)
+    var dataFormatada = data.getDate() + " de " + meses[data.getUTCMonth()] + " de " + data.getFullYear()
+    return dataFormatada
+  }
+
+</script>
+
+<!-- Fechar PopUp  -->
+<script>
+  function fecharPopUp() {
+    var modal = document.getElementById("modal")
+    modal.style.display = "none"
+  }
+
+
+  function abrirEditorRelatorio() {
+    document.getElementById("editorModal").style.display = "block";
+  }
+
+  function fecharEditor() {
+    document.getElementById("editorModal").style.display = "none";
+  }
+
+  function exportarRelatorioPDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    const conteudo = document.getElementById("editorTexto").innerText;
+
+    const linhas = doc.splitTextToSize(conteudo, 170);
+
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(12);
+
+    doc.text(linhas, 20, 20);
+
+    doc.save("relatorio-personalizado.pdf");
+  }
+</script>
+
+<script type="module">
+  import { listarResumoServidores, graficoResulmoServidores, trocarGrafico, trocarKpi } from "../assets/javascript/servidor.js"
+  // listarResumoServidores()
+  graficoResulmoServidores()
+  // trocarKpi('cpu')
+  const escolhaServidor = document.getElementById('select_lista_servidores')
+  escolhaServidor.addEventListener('change', () => {
+    trocarGrafico(escolhaServidor.value)
+  })
+
+  // const metricaKpi = document.getElementById('select_metricas_kpis')
+  // metricaKpi.addEventListener('change', () => {
+  //   trocarKpi(metricaKpi.value)
+  // })
 </script>

@@ -1,0 +1,549 @@
+@import url('../default.css');
+@import url('../dashboard.css');
+
+:root {
+    --color-kpi-amarelo: #e8e527;
+    --color-kpi-laranja: #E88827;
+    --color-kpi-verde: #54D14F;
+    --color-kpi-vermelha: #E82927;
+    --color-cinza: #ececec;
+    --sombra-card: 0px 4px 12px #00000033;
+    --padding-card: 10px 10px
+}
+
+body {
+    overflow-y: auto;
+}
+
+
+@media screen {
+    .t-vermelho {
+        color: var(--color-kpi-vermelha);
+        font-weight: 600;
+    }
+
+    .t-laranja {
+        color: var(--color-kpi-laranja);
+    }
+
+    .t-verde {
+        color: var(--color-kpi-verde)
+    }
+
+    .incidente-critico {
+        background-color: var(--color-kpi-vermelha);
+    }
+
+    .incidente-medio {
+        background-color: var(--color-kpi-laranja);
+    }
+
+    .incidente-baixo {
+        background-color: var(--color-kpi-amarelo);
+    }
+
+    .titulo-card {
+        font-size: 17px;
+        font-weight: 600;
+        color: var(--color-accent);
+    }
+
+    .subtitulo-card {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--color-opaque2);
+    }
+}
+
+@media screen {
+
+    .section-kpis {
+        width: 100%;
+        height: 17vh;
+        margin-bottom: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+    }
+
+    .d-kpi {
+        background-color: #ffffff;
+        width: 24%;
+        height: 100%;
+        border-radius: 5px;
+        padding: 5px 15px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        box-shadow: var(--sombra-card);
+    }
+
+    .d-kpi .titulo {
+        color: #4C4B4B;
+        font-weight: 600;
+        font-size: 18px;
+    }
+
+    .d-kpi .indicador {
+        font-weight: 600;
+        font-size: 35px;
+    }
+
+    .d-kpi .descricao {
+        display: flex;
+        height: auto;
+        display: flex;
+        align-items: center;
+        justify-content: start;
+    }
+
+    .d-kpi .descricao p {
+        margin-left: 5px;
+        font-size: 18px;
+        text-align: start;
+        font-weight: 600;
+
+    }
+
+    .d-kpi img {
+        width: 25px;
+    }
+
+    .card-saude {
+        width: 45%;
+        height: 100%;
+        background-color: white;
+        border-radius: 5px;
+        box-shadow: var(--sombra-card);
+        padding: var(--padding-card);
+    }
+
+    .card-incidentes {
+        width: 54%;
+        height: 100%;
+        background-color: white;
+        border-radius: 5px;
+        box-shadow: var(--sombra-card);
+        padding: var(--padding-card);
+    }
+
+    .topo-card {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .card-grafico-linha {
+        width: 100%;
+        height: 70%;
+        margin: 5px 0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .card-infos-add {
+        width: 100%;
+        display: flex;
+        justify-content: end;
+        align-items: center;
+    }
+
+    .card-infos-add .numero {
+        font-size: 32px;
+    }
+
+    .card-infos-add .desc {
+        height: 100%;
+        max-width: 250px;
+        display: flex;
+        flex-direction: column;
+        margin-left: 10px;
+        color: var(--color-opaque2);
+    }
+
+
+    .btn-relatorio {
+        background-color: var(--color-blue1);
+        border: none;
+        border-radius: 5px;
+        padding: 5px 20px;
+        color: white;
+        font-weight: 500;
+        cursor: pointer;
+        transition: .3s ease-in;
+    }
+
+    .btn-relatorio:hover {
+        background-color: var(--color-blue);
+    }
+
+    .section-saude {
+        width: 100%;
+        margin-bottom: 10px;
+        height: 300px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .section-dados {
+        width: 100%;
+        margin-bottom: 10px;
+        height: 500px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .dados-atencao {
+        width: 33%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .dados-atencao,
+    .dados-gerais {
+        height: 350px;
+    }
+
+    .card-alerta {
+        width: 100%;
+        height: 21%;
+        background-color: var(--color-blue2);
+        box-shadow: var(--sombra-card);
+        padding: 5px 10px;
+        color: white;
+    }
+
+    .card-alerta .titulo {
+        font-weight: 600;
+    }
+
+    .card-alerta .texto {
+        font-size: 14px;
+        color: var(--color-ghost);
+    }
+
+    .card-alerta .alerta-clima-serv {
+        font-weight: 600;
+        color: white;
+    }
+
+    .card-atencao {
+        width: 100%;
+        height: 78%;
+        border-radius: 5px;
+        background-color: white;
+        box-shadow: var(--sombra-card);
+        padding: var(--padding-card);
+    }
+
+
+    .lista {
+        overflow-y: auto;
+        width: 100;
+        margin-top: 5px;
+        height: 80%;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .card-serv-recorrente {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 5px 10px;
+        width: 100%;
+        height: 45px;
+        border-radius: 5px;
+        background-color: var(--color-cinza);
+    }
+
+    .card-serv-recorrente .titulo {
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--color-opaque2);
+    }
+
+    .card-serv-recorrente .desc {
+        font-size: 13px;
+    }
+
+    .card-serv-recorrente .reincidencias {
+        color: var(--color-kpi-vermelha);
+        font-weight: 600;
+        font-family: 14px;
+    }
+
+    .dados-gerais {
+        width: 66%;
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .incidentes,
+    .distribuicao {
+        width: 49.2%;
+        height: 100%;
+        border-radius: 5px;
+        background-color: white;
+        box-shadow: var(--sombra-card);
+        padding: var(--padding-card);
+    }
+
+    .btn-incidente {
+        background-color: var(--color-kpi-vermelha);
+        border: none;
+        border-radius: 5px;
+        padding: 5px 20px;
+        color: white;
+        font-weight: 500;
+        cursor: pointer;
+        transition: .3s ease-in;
+    }
+
+    .btn-incidente:hover {
+        background-color: #c11111;
+    }
+
+    .lista-incidentes {
+        overflow-y: auto;
+        width: 100;
+        margin-top: 5px;
+        height: 62%;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        border-bottom: solid 3px var(--color-opaque);
+    }
+
+    .card-incidente {
+        width: 100%;
+        min-height: 60px;
+        background-color: var(--color-cinza);
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .card-incidente .status {
+        width: 12px;
+        height: 100%;
+    }
+
+    .card-incidente .infos {
+        height: 100%;
+        padding: 10px 5px;
+    }
+
+    .card-incidente .infos .titulo {
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--color-opaque2);
+        margin: 0;
+    }
+
+    .card-incidente .infos .desc {
+        margin-top: 0;
+        font-size: 12px;
+    }
+
+    .card-incidente .tempo {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+        justify-content: center;
+        padding: 0px 8px;
+    }
+
+    .card-incidente .tempo p {
+        font-size: 15px;
+        font-weight: 600;
+    }
+
+    .kpis-adicionais {
+        display: flex;
+        width: 100%;
+        min-height: 30%;
+        padding: 10px 10px;
+        /* background-color: #4C4B4B; */
+        color: var(--color-opaque2);
+        justify-content: space-between;
+    }
+
+    .kpis-adicionais div {
+        border-radius: 5px;
+    }
+
+    .kpis-adicionais .kpi-menor {
+        width: 44%;
+        padding: 5px;
+        background-color: var(--color-cinza);
+    }
+
+    .kpis-adicionais .kpi-maior {
+        width: 54%;
+        padding: 5px;
+        background-color: var(--color-cinza);
+    }
+
+    .kpis-adicionais .titulo {
+        font-weight: 600;
+        font-size: 13px;
+    }
+
+    .kpis-adicionais .desc {
+        font-weight: 500;
+        font-size: 11px;
+    }
+
+    .kpis-adicionais .valor {
+        font-size: 20px;
+        font-weight: 700;
+    }
+
+    .card-colaborador {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        height: 40px;
+    }
+
+    .card-colaborador .colaborador {
+        width: 40px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .card-colaborador .colaborador .icone {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 100%;
+        color: white;
+        font-size: 20px;
+        font-weight: 600;
+        background-color: #959595;
+    }
+
+    .card-colaborador .infos {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .card-colaborador .infos .separacao {
+        width: 100%;
+        height: 50%;
+        display: flex;
+        justify-content: space-between;
+        padding: 0px 5px;
+        font-weight: 600;
+        align-items: center;
+    }
+
+    .card-colaborador .barra {
+        width: 100%;
+        height: 50%;
+        border-radius: 20px;
+        background-color: #44495E;
+        padding: 0;
+    }
+
+    .card-colaborador .preenchimento {
+        width: 10%;
+        height: 100%;
+        border-radius: 20px;
+        background-color: #54D14F;
+    }
+
+}
+
+@media screen and (max-width: 1224px) {
+    .section-kpis {
+        min-height: 300px;
+        height: auto;
+        flex-wrap: wrap;
+        justify-content: start;
+        margin-bottom: 5px;
+        gap: 10px;
+    }
+
+    .d-kpi {
+        min-width: 300px;
+        min-height: 120px;
+        height: 140px;
+        margin: 0;
+    }
+}
+
+@media screen and (max-width: 957px) {
+    .section-kpis {
+        justify-content: center;
+    }
+
+    .d-kpi {
+        min-width: 300px;
+        width: 45%;
+        height: 140px;
+    }
+}
+
+@media screen and (max-width: 880px) {
+    .section-saude {
+        flex-direction: column-reverse;
+        height: auto;
+    }
+
+    .card-saude,
+    .card-incidentes {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .section-dados {
+        flex-direction: column-reverse;
+        height: auto;
+        width: 100%;
+        gap: 10px;
+    }
+
+    .dados-gerais,
+    .dados-atencao{
+        width: 100%;
+    }
+
+    .incidentes, .distribuicao{
+        width: 49%;
+        height: 450px;
+    }
+}
+
+@media screen and (max-width: 635px) {
+    .d-kpi {
+        min-width: 150px;
+        width: 45%;
+        min-height: 140px;
+        height: auto;
+    }
+    .dados-gerais{
+        flex-direction: column;
+        gap: 10px;
+    }
+     .incidentes, .distribuicao{
+        width: 100%;
+        height: 450px;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .section-saude {
+    }
+}
+

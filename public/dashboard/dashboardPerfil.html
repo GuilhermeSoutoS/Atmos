@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Title -->
+    <title>Dashboard - Equipe</title>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/dashboard/dashboardPerfil.css">
+
+    <!-- Flavicon -->
+    <link rel="icon" href="../assets/icons/favicon.ico" type="image/x-icon" />
+
+    <!--Google Fonts-->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet" />
+
+
+    <!-- ChartJS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+<nav class="sidebar" id="siderbar">
+    <div class="logo-container">
+      <a href="./dashboardAtmos.html" class="logo">
+        <div class="cicle"></div>
+        <span>ATMOS</span>
+      </a>
+    </div>
+
+    <ul class="nav-links">
+      <ul>
+        <li class="nav-category">
+          <span>PRINCIPAL</span>
+        </li>
+        <li class="nav-item area-contribuidor">
+          <a href="./dashboardAtmos.html">
+            <img src="../assets/images/pc.svg" class="icon" alt="">
+            <span>Home</span>
+          </a>
+        </li>
+        <li class="nav-item area-gestor">
+          <a href="./dashboardAtmosGerente.html">
+            <img src="../assets/images/pc.svg" class="icon" alt="">
+            <span>Home</span>
+          </a>
+        </li>
+        <li class="nav-item area-contribuidor">
+          <a href="./dashboardAlertas.html">
+            <img src="../assets/images/alert.svg" class="icon" alt="">
+            <span>Alertas</span>
+          </a>
+        </li>
+        <li class="nav-item area-gestor">
+          <a href="./dashboardAlertasGerente.html">
+            <img src="../assets/images/alert.svg" class="icon" alt="">
+            <span>Alertas</span>
+          </a>
+        </li>
+        <li class="nav-item area-gestor">
+          <a href="./dashboardRelatorios.html">
+            <img src="../assets/images/documentos.svg" class="icon" alt="">
+            <span>Relatorios</span>
+          </a>
+        </li>
+      </ul>
+      <ul>
+        <li class="nav-category">
+          <span>INFRAESTRUTURA</span>
+        </li>
+        <li class="nav-item">
+          <a href="./dashboardServidor.html">
+            <img src="../assets/images/server.svg" class="icon" alt="">
+            <span>Servidores</span>
+          </a>
+        </li>
+        <li class="nav-item area-gestor">
+          <a href="./dashboardEquipe.html">
+            <img src="../assets/images/user.svg" class="icon" alt="">
+            <span>Equipe</span>
+          </a>
+        </li>
+      </ul>
+    </ul>
+
+    <div class="info-user" onclick="window.location.href = './dashboardPerfil.html'">
+      <div class="img-user" id="usarioimagem">
+        <img alt="A">
+      </div>
+      <div>
+        <h3><span id="usuarionome">usuário</span></h3>
+        <h5><span id="usuarioemail">email</span></h3>
+      </div>
+    </div>
+
+    <!--Menu mobile-->
+    <div class="menu" style="display: none" id="menu">
+      <div class="menu-container" id="menu-mobile">
+        <ul>
+          <ul>
+            <li class="nav-category">
+              <span>PRINCIPAL</span>
+            </li>
+            <li class="nav-item area-contribuidor">
+              <a href="./dashboardAtmos.html">
+                <img src="../assets/images/pc.svg" class="icon" alt="">
+                <span>Home</span>
+              </a>
+            </li>
+            <li class="nav-item area-gestor">
+              <a href="./dashboardAtmosGerente.html">
+                <img src="../assets/images/pc.svg" class="icon" alt="">
+                <span>Home</span>
+              </a>
+            </li>
+            <li class="nav-item area-contribuidor">
+              <a href="./dashboardAlertas.html">
+                <img src="../assets/images/alert.svg" class="icon" alt="">
+                <span>Alertas</span>
+              </a>
+            </li>
+            <li class="nav-item area-gestor">
+              <a href="./dashboardAlertasGerente.html">
+                <img src="../assets/images/alert.svg" class="icon" alt="">
+                <span>Alertas</span>
+              </a>
+            </li>
+            <li class="nav-item area-gestor">
+              <a href="./dashboardRelatorios.html">
+                <img src="../assets/images/documentos.svg" class="icon" alt="">
+                <span>Relatorios</span>
+              </a>
+            </li>
+          </ul>
+          <ul>
+            <li class="nav-category">
+              <span>INFRAESTRUTURA</span>
+            </li>
+            <li class="nav-item">
+              <a href="./dashboardServidor.html">
+                <img src="../assets/images/server.svg" class="icon" alt="">
+                <span>Servidores</span>
+              </a>
+            </li>
+            <li class="nav-item area-gestor">
+              <a href="./dashboardEquipe.html">
+                <img src="../assets/images/user.svg" class="icon" alt="">
+                <span>Equipe</span>
+              </a>
+            </li>
+          </ul>
+          <ul>
+            <li class="nav-category">
+              <span>Usuário</span>
+            </li>
+            <li class="nav-item nav-item-active  ">
+              <a href="./dashboardPerfil.html">
+                <img src="../assets/images/user.svg" class="icon" alt="">
+                <span>Perfil</span>
+              </a>
+            </li>
+          </ul>
+        </ul>
+      </div>
+    </div>
+    <!-- Menu Icon -->
+    <div class="container-menu">
+      <div class="menu-icon" id="menu-icon">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+  
+
+    
+    <main class="container">
+        <header>
+            <div class="infos">
+                <div class="screen-title">
+                    <ul class="breadcrumb">
+                        <li><a href="#">Usuário</a></li>
+                        <li><a href="#"><span>Perfil</span></a></li>
+                    </ul>
+                </div>
+                <div class="screen-infos">
+                    <div><span></span>Sistema Operacional</div>
+                    <span id="dataSistema"></span>
+                </div>
+            </div>
+            <div class="tela">
+                <div>
+                    <h1>Perfil de Usuário</h1>
+                    <span>Configuração e visualoização dos dados de usuário</span>
+                </div>
+            </div>
+        </header>
+
+        <section>
+            <div class="card-perfil">
+                <div class="dados-perfil">
+                    <div class="usuario">
+                        <div class="perfil" id="perfil_iniciais">
+                            BL
+                        </div>
+                        <div class="user">
+                            <h2 id="perfil_nome_usuario">Brandão Lima</h2>
+                            <div id="perfil_tipo_conta">
+                                <span class="etiqueta-semi-bold etiqueta-azul">● Gestor</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="status" id="perfil_status_conta">
+                        <span class="etiqueta-semi-bold etiqueta-verde">● Ativo</span>
+                    </div>
+                </div>
+                <div class="dados-gerais">
+                    <div class="dados">
+                        <span class="titulo">E-MAIL</span>
+                        <span class="info" id="perfil_email_usuario">brandaolima@sptech.school</span>
+                    </div>
+                    <div class="dados">
+                        <span class="titulo">SETOR</span>
+                        <span class="info" id="perfil_setor_usuario">--</span>
+                    </div>
+                    <div class="dados">
+                        <span class="titulo">EMPRESA</span>
+                        <span class="info" id="perfil_empresa_usuario">INSTITUTO DE METEOROLOGIA DE SANTA
+                            CATARINA</span>
+                    </div>
+                    <div class="dados">
+                        <span class="titulo">PAIS</span>
+                        <span class="info">BRASIL</span>
+                    </div>
+                    <div class="dados">
+                        <span class="titulo">CPF/DOC. IDENTIFICAÇÃO</span>
+                        <span class="info" id="perfil_documento_usuario">123.456.789.99</span>
+                    </div>
+                    <div class="dados">
+                        <span class="titulo">DATA DE NASCIMENTO</span>
+                        <span class="info" id="perfil_data_nasc">25/12/2000</span>
+                    </div>
+                    <div class="dados">
+                        <span class="titulo">CONTA CRIADA EM</span>
+                        <span class="info" id="perfil_data_criacao">25/02/2026</span>
+                    </div>
+                    <div class="dados">
+                        <span class="titulo">LOCALIZAÇÃO</span>
+                        <span class="info">São Paulo/Brasil</span>
+                    </div>
+                    <div class="dados">
+                        <span class="titulo">SUPERVISOR</span>
+                        <span class="info" id="perfil_supervisor_usuario">São Paulo/Brasil</span>
+                    </div>
+
+                </div>
+                <div class="acoes">
+                    <p id="perfil_data_atualizacao">Última atualização: </p>
+                    <button class="btn-azul" onclick="editarPerfil()">
+                        <img src="../assets/images/icones/editar.svg" alt="editar icon">
+                        Alterar dados
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+    <div class="fundoModal" id="modalEditarPerfil">
+        <div class="modal modalUsuario">
+            <!-- Topo do modal -->
+            <header>
+                <!-- Titulo e subtitulo -->
+                <div>
+                    <h2>Alterar Dados</h2>
+                    <span class="subTitulo">Alterar dados da conta</span>
+                </div>
+                <!-- botão de sair -->
+                <div>
+                    <button onclick="fecharModal(0)">
+                        X
+                    </button>
+                </div>
+            </header>
+            <div class="conteudo-usuario">
+                <div class="dados-perfil">
+                    <div class="usuario">
+                        <div class="perfil" id="modal_iniciais">
+                            BL
+                        </div>
+                        <div>
+                            <!-- <input type="file" name="imagem" id=""> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="dados-gerais dados-gerais-form">
+                    <label class="w-100">
+                        <span class="titulo">E-MAIL</span>
+                        <input type="text" id="input_email" value="" placeholder="geraldo@atmos.com">
+                    </label>
+                    <label class="w-33">
+                        <span class="titulo">NOME</span>
+                        <input type="text" id="input_nome" value="" placeholder="Geraldo Atmos">
+                    </label>
+                    <label class="w-33">
+                        <span class="titulo">CPF/DOC. IDENTIFICAÇÃO</span>
+                        <input type="text" id="input_doc_indentificacao" value="" placeholder="000.000.000-01">
+                    </label>
+                    <label class="w-33">
+                        <span class="titulo">DATA DE NASCIMENTO</span>
+                        <input type="date" id="input_data_nasc" value="">
+                    </label>
+                    <label class="w-50">
+                        <span class="titulo">SENHA</span>
+                        <input type="password" id="input_senha" value="" placeholder="*****">
+                    </label>
+                    <label class="w-50">
+                        <span class="titulo">CONFIRMAÇÃO DE SENHA</span>
+                        <input type="password" id="input_confimacao_senha" value="" placeholder="*****">
+                    </label>
+                </div>
+                <div class="acoesModal">
+                    <div></div>
+                    <div style="display: flex;">
+                        <button class="btn-branco" onclick="cancelar(0)">
+                            Cancelar
+                        </button>
+                        <button class="btn-azul" onclick="alterarDados(sessionStorage.ID_USUARIO)">
+                            Confirmar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+<!-- Scripts Funcionais -->
+<script src="../assets/javascript/datetime.js"></script>
+<script src="../assets/javascript/menu.js"></script>
+<script src="../assets/javascript/sessao.js"></script>
+
+<script>
+    function fecharModal(tipoModal) {
+        const modal = document.getElementsByClassName("fundoModal")
+        modal[tipoModal].style.display = 'none';
+    }
+
+    function editarPerfil() {
+        var modal = document.getElementById("modalEditarPerfil")
+        modal.style.display = 'flex'
+    }
+
+    function cancelar(modal) {
+        input_email.value = ''
+        input_contato.value = ''
+        input_nome.value = ''
+        input_doc_indentificacao.value = ''
+        input_data_nasc.value = ''
+        input_senha.value = ''
+        input_confimacao_senha.value = ''
+        fecharModal(modal)
+    }
+
+    function bucarDadosUsuario() {
+        var idUsuario = sessionStorage.ID_USUARIO
+        fetch(`/usuarios/buscarUsuarioPorId/${idUsuario}`)
+            .then(function (res) {
+                return res.json();
+            })
+            .then(function (usuarios) {
+                var usuario = usuarios[0]
+                var etiquetaAcesso = ''
+                var etiquetaStatus = ''
+                var supervisor = ''
+                if (usuario.tipoUsuario == 'Gestor') {
+                    etiquetaAcesso = `etiqueta-azul`
+                } else {
+                    etiquetaAcesso = `etiqueta-laranja`
+                }
+                if (usuario.statusUsuario == 'Ativo') {
+                    etiquetaStatus = `etiqueta-verde`
+                } else {
+                    etiquetaStatus = `etiqueta-vermelha`
+                }
+                if (usuario.supervisor == null) {
+                    supervisor = 'Não Vinculado'
+                } else {
+                    supervisor = usuario.supervisor
+                }
+
+                document.getElementById('perfil_iniciais').innerText = usuario.nome.split(" ")[0].split("")[0] + usuario.nome.split(" ")[1].split("")[0]
+                document.getElementById('perfil_nome_usuario').innerText = usuario.nome
+                document.getElementById('perfil_tipo_conta').innerHTML = `<span class="etiqueta-semi-bold ${etiquetaAcesso}">● ${usuario.tipoUsuario}</span>`
+                document.getElementById('perfil_status_conta').innerHTML = `<span class="etiqueta-semi-bold ${etiquetaStatus}">● ${usuario.statusUsuario}</span>`
+                document.getElementById('perfil_email_usuario').innerText = usuario.email
+                document.getElementById('perfil_setor_usuario').innerText = usuario.setor
+                document.getElementById('perfil_empresa_usuario').innerText = usuario.razaoSocial
+                document.getElementById('perfil_documento_usuario').innerText = usuario.cpf
+                document.getElementById('perfil_data_nasc').innerText = new Date(usuario.dataNascimento).toLocaleDateString('pt-BR')
+                document.getElementById('perfil_data_criacao').innerText = new Date(usuario.dataCadastro).toLocaleDateString('pt-BR')
+                document.getElementById('perfil_supervisor_usuario').innerText = supervisor
+                document.getElementById('perfil_data_atualizacao').innerHTML += new Date(usuario.dataAtualizacao).toLocaleString('pt-BR')
+
+                // modal
+                document.getElementById('modal_iniciais').value = usuario.nome.split(" ")[0].split("")[0] + usuario.nome.split(" ")[1].split("")[0]
+                document.getElementById('input_email').value = usuario.email
+                document.getElementById('input_nome').value = usuario.nome
+                document.getElementById('input_doc_indentificacao').value = usuario.cpf
+                document.getElementById('input_data_nasc').value = usuario.dataNascimento
+            });
+    }
+
+    function alterarDados() {
+        var email = document.getElementById('input_email').value
+        var nome = document.getElementById('input_nome').value
+        var doc_indentificacao = document.getElementById('input_doc_indentificacao').value
+        var data_nasc = document.getElementById('input_data_nasc').value
+        var senha = document.getElementById('input_senha').value
+        var confimacao_senha = document.getElementById('input_confimacao_senha').value
+
+        if (
+            email == null ||
+            nome == null ||
+            doc_indentificacao == null ||
+            data_nasc == null ||
+            senha == null ||
+            confimacao_senha == null
+        ) {
+            console.log('vazio')
+        } else {
+            fetch("/usuarios/alterarDadosPerfil", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    emailServer: email,
+                    nomeServer: nome,
+                    docIndentificacaoServer: doc_indentificacao,
+                    senhaServer: senha,
+                    dataNascServer: data_nasc,
+                    idUsuarioServer: sessionStorage.ID_USUARIO
+                })
+            })
+                .then(resposta => {
+                    console.log("ESTOU NO THEN DO alterarDados()!")
+                    console.log(resposta)
+                    if (resposta.ok) {
+                        console.log(resposta);
+                        resposta.json().then((json) => {
+                            console.log('passou')
+                        });
+                        window.location.reload()
+                    } else {
+                        console.log("Houve um erro ao atualizar os dados!");
+                    }
+
+                }).catch(function (erro) {
+                    console.log(erro);
+                })
+
+
+        }
+    }
+
+    bucarDadosUsuario()
+
+</script>

@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Title -->
+  <title>Dashboard - Equipe</title>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="../assets/css/dashboard.css">
+  <link rel="stylesheet" href="../assets/css/dashboard/dashboardEquipe.css">
+
+  <!-- Flavicon -->
+  <link rel="icon" href="../assets/icons/favicon.ico" type="image/x-icon" />
+
+  <!--Google Fonts-->
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet" />
+
+
+  <!-- ChartJS -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+  <nav class="sidebar" id="siderbar">
+    <div class="logo-container">
+      <a href="./dashboardAtmos.html" class="logo">
+        <div class="cicle"></div>
+        <span>ATMOS</span>
+      </a>
+    </div>
+
+    <ul class="nav-links">
+      <ul>
+        <li class="nav-category">
+          <span>PRINCIPAL</span>
+        </li>
+        <li class="nav-item area-contribuidor">
+          <a href="./dashboardAtmos.html">
+            <img src="../assets/images/pc.svg" class="icon" alt="">
+            <span>Home</span>
+          </a>
+        </li>
+        <li class="nav-item area-gestor">
+          <a href="./dashboardAtmosGerente.html">
+            <img src="../assets/images/pc.svg" class="icon" alt="">
+            <span>Home</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="./dashboardAlertasGerente.html">
+            <img src="../assets/images/alert.svg" class="icon" alt="">
+            <span>Alertas</span>
+          </a>
+        </li>
+        <li class="nav-item area-gestor">
+          <a href="./dashboardRelatorios.html">
+            <img src="../assets/images/documentos.svg" class="icon" alt="">
+            <span>Relatorios</span>
+          </a>
+        </li>
+      </ul>
+      <ul>
+        <li class="nav-category">
+          <span>INFRAESTRUTURA</span>
+        </li>
+        <li class="nav-item">
+          <a href="./dashboardServidor.html">
+            <img src="../assets/images/server.svg" class="icon" alt="">
+            <span>Servidores</span>
+          </a>
+        </li>
+        <li class="nav-item nav-item-active area-gestor">
+          <a href="./dashboardEquipe.html">
+            <img src="../assets/images/user.svg" class="icon" alt="">
+            <span>Equipe</span>
+          </a>
+        </li>
+      </ul>
+    </ul>
+
+    <div class="info-user" onclick="window.location.href = './dashboardPerfil.html'">
+      <div class="img-user" id="usarioimagem">
+        <img alt="A">
+      </div>
+      <div>
+        <h3><span id="usuarionome">usuário</span></h3>
+        <h5><span id="usuarioemail">email</span></h3>
+      </div>
+    </div>
+
+    <!--Menu mobile-->
+    <div class="menu" style="display: none" id="menu">
+      <div class="menu-container" id="menu-mobile">
+        <ul>
+          <ul>
+            <li class="nav-category">
+              <span>PRINCIPAL</span>
+            </li>
+            <li class="nav-item area-contribuidor">
+              <a href="./dashboardAtmos.html">
+                <img src="../assets/images/pc.svg" class="icon" alt="">
+                <span>Home</span>
+              </a>
+            </li>
+            <li class="nav-item area-gestor">
+              <a href="./dashboardAtmosGerente.html">
+                <img src="../assets/images/pc.svg" class="icon" alt="">
+                <span>Home</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="./dashboardAlertasGerente.html">
+                <img src="../assets/images/alert.svg" class="icon" alt="">
+                <span>Alertas</span>
+              </a>
+            </li>
+            <li class="nav-item area-gestor">
+              <a href="./dashboardRelatorios.html">
+                <img src="../assets/images/documentos.svg" class="icon" alt="">
+                <span>Relatorios</span>
+              </a>
+            </li>
+          </ul>
+          <ul>
+            <li class="nav-category">
+              <span>INFRAESTRUTURA</span>
+            </li>
+            <li class="nav-item">
+              <a href="./dashboardServidor.html">
+                <img src="../assets/images/server.svg" class="icon" alt="">
+                <span>Servidores</span>
+              </a>
+            </li>
+            <li class="nav-item nav-item-active area-gestor">
+              <a href="./dashboardEquipe.html">
+                <img src="../assets/images/user.svg" class="icon" alt="">
+                <span>Equipe</span>
+              </a>
+            </li>
+          </ul>
+          <ul>
+            <li class="nav-category">
+              <span>Usuário</span>
+            </li>
+            <li class="nav-item ">
+              <a href="./dashboardPerfil.html">
+                <img src="../assets/images/user.svg" class="icon" alt="">
+                <span>Perfil</span>
+              </a>
+            </li>
+          </ul>
+        </ul>
+      </div>
+    </div>
+    <!-- Menu Icon -->
+    <div class="container-menu">
+      <div class="menu-icon" id="menu-icon">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+
+  </nav>
+
+
+
+  <main class="container">
+    <header>
+      <div class="infos">
+        <div class="screen-title">
+          <ul class="breadcrumb">
+            <li><a href="#">Sistema</a></li>
+            <li><a href="#"><span>Equipe</span></a></li>
+          </ul>
+        </div>
+        <div class="screen-infos">
+          <div><span></span>Sistema Operacional</div>
+          <span id="dataSistema"></span>
+        </div>
+      </div>
+      <div class="tela">
+        <div>
+          <h1>Gerenciamento de Usuários</h1>
+          <span>Controle de acesso e Permições da plataforma</span>
+        </div>
+        <div class="acoes">
+
+          <button class="btn-azul" onclick="adicionarUsuario()">
+            <img src="../assets/images/icones/iconeAdd.svg" alt="add icon">
+            ADICIONAR
+          </button>
+        </div>
+      </div>
+    </header>
+<!-- 
+    <section class="section-kpis">
+      <div class="secao-kpis">
+        <div class="titulos-kpi">
+          <h3>Visão Geral</h3>
+          <h4>Informações Gerais</h4>
+        </div>
+        <div class="conjunto-kpis">
+          <div class="kpi">
+            <h4>Membros da Equipe</h4>
+            <p id="kpi_1"></p>
+            <span>Membros Ativos</span>
+          </div>
+          <div class="kpi">
+            <h4>Membros da Equipe</h4>
+            <p id="kpi_2" class="kpi-vermelho"></p>
+            <span>Membros inativados</span>
+          </div>
+          <div class="kpi">
+            <h4>Membros Adicionados</h4>
+            <p id="kpi_3"></p>
+            <span>Ultimo mês</span>
+          </div>
+          <div class="kpi">
+            <h4>Supervisores</h4>
+            <p id="kpi_4"></p>
+            <span>Vinculados</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-graficos">
+      <div class="card card-crescimento-usuarios">
+        <h3>Crescimento de Usuários</h3>
+        <span>Cadastros acumulados - últimos 6 meses</span>
+        <div class="conteudo">
+          <canvas id="crescimentoUsuario" class="graf-crescimento-usuario"></canvas>
+        </div>
+      </div>
+      <div class="card card-distribuicao-usuarios">
+        <h3>Distribuição de Usuários</h3>
+        <span>Distribuição por Tipo de acesso: Analista - Gestor</span>
+        <div class="conteudo">
+          <div>
+            <canvas id="distribuicaoUsuarios" class="graf-distribuicao-usuarios"></canvas>
+          </div>
+
+        </div>
+      </div>
+    </section> -->
+
+    <section>
+      <div class="filtros-busca">
+        <div class="barra-busca">
+          <input type="text" placeholder="Buscar servidor por nome ou ID...">
+        </div>
+        <div class="select">
+          <select name="filtroStatus" id="filtroStatus">
+            <option value="All_status">Todos os Status</option>
+            <option value="ativo">Ativo</option>
+            <option value="inativo">Inativo</option>
+          </select>
+        </div>
+        <div class="select">
+          <select name="filtroSistema" id="filtroSistema">
+            <option value="all_acesso">Todos os tipos de Acesso</option>
+            <option value="gestor">Gestor</option>
+            <option value="analista">Analista</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="area-tabela">
+        <h4>Lista de Usuarios</h4>
+
+        <div class="envolve-tabela">
+          <table class="tabela-usuario">
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Tipo de Acesso</th>
+                <th>Status</th>
+                <th>Data de Cadastro</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="tabela_colaboradores">
+              <tr>
+                <td>
+                  <h4>Nenhum servidor encontrado</h4>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="paginacao">
+          <button onclick="ativarUsuario()">1</button>
+          <button onclick="desativarUsuario()">2</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal Desativar Usuario -->
+  <div class="fundoModal" id="modalDesativarUsuario">
+    <div class="modal modalAlteracaoStatus">
+      <header>
+        <!-- Titulo e subtitulo -->
+        <div>
+          <h2>Inativar Usuario</h2>
+          <span class="subTitulo">Inativar o usuario da equipe
+          </span>
+        </div>
+      </header>
+      <div class="conteudo-remover">
+        <p>Tem certeza de que deseja desativar o acesso desta conta do contribuidor?</p>
+        <p>Essa ação é reversível, porém o contribuidor perderá o acesso ao sistema enquanto a conta estiver desativada.
+        </p>
+        <p>Você poderá reativá-la a qualquer momento.</p>
+        <p>Se deseja continuar, confirme a desativação. Caso contrário, recomendamos cancelar.</p>
+        <div class="acoesModal">
+          <button class="btn-branco" onclick="fecharModal(0)">
+            Cancelar
+          </button>
+          <button class="btn-vermelho" onclick="confirmarAlteracao('Inativo')">
+            Desativar
+          </button>
+          <input type="text" style="display: none;" id="input_modal_desativar_id_usuario">
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal ativar Usuario -->
+  <div class="fundoModal" id="modalAtivarUsuario">
+    <div class="modal modalAlteracaoStatus">
+      <header>
+        <!-- Titulo e subtitulo -->
+        <div>
+          <h2>Ativar Usuario</h2>
+          <span class="subTitulo">Desativar o usuario da equipe
+          </span>
+        </div>
+      </header>
+      <div class="conteudo-remover">
+        <p>Tem certeza de que deseja ativar esta conta do contribuidor?</p>
+        <p>Ao ativar, o contribuidor recuperará o acesso ao sistema e poderá voltar a utilizar normalmente os recursos
+          disponíveis.
+        </p>
+        <p>Se deseja continuar, confirme a ativação. Caso contrário, você pode cancelar.</p>
+        <div class="acoesModal">
+          <button class="btn-branco" onclick="fecharModal(1)">
+            Cancelar
+          </button>
+          <button class="btn-azul" onclick="confirmarAlteracao('Ativo')">
+            Ativar
+          </button>
+          <input type="text" style="display: none;" id="input_modal_ativar_id_usuario">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal detalhes Usuario -->
+  <div class="fundoModal" id="modalDetalhesPerfil">
+
+  </div>
+
+  <!-- Modal Editar Usuario -->
+  <div class="fundoModal" id="modalEditarPerfil">
+    <div class="modal modalUsuario modalEditar">
+      <header>
+        <div>
+          <h2>Atualizar usuário</h2>
+          <span class="subTitulo">Atualizar dados do contribuidor da equipe</span>
+        </div>
+        <div>
+          <button onclick="fecharModal(3)">
+            X
+          </button>
+        </div>
+      </header>
+      <div class="conteudo-usuario">
+        <div class="dados-perfil">
+          <div class="usuario">
+            <div class="perfil">
+              BL
+            </div>
+            <div>
+              <input type="file" name="imagem" id="">
+            </div>
+          </div>
+        </div>
+        <div class="dados-gerais dados-gerais-form">
+          <label style="display: none;">
+            <span class="titulo">ID USUARIO</span>
+            <input type="text" id="input_id_usuario" value="" placeholder="geraldo@atmos.com">
+          </label>
+          <label class="w-75">
+            <span class="titulo">E-MAIL</span>
+            <input type="text" id="input_email" value="" placeholder="geraldo@atmos.com">
+          </label>
+          <label class="w-25">
+            <span class="titulo">CPF/DOC. IDENTIFICAÇÃO</span>
+            <input type="text" id="input_doc_indentificacao" oninput="formatarCPF(this)" value="" placeholder="000.000.000-01">
+          </label>
+          <label class="w-75">
+            <span class="titulo">NOME</span>
+            <input type="text" id="input_nome" value="" placeholder="Geraldo Atmos">
+          </label>
+
+          <label class="w-25">
+            <span class="titulo">DATA DE NASCIMENTO</span>
+            <input type="date" id="input_data_nasc" value="">
+          </label>
+          <label class="w-50">
+            <span class="titulo">TIPO DE ACESSO</span>
+            <select id="select_tipo_acesso">
+              <option value="Gestor">Gestor</option>
+              <option value="Funcionario" selected>Contribuidor</option>
+            </select>
+          </label>
+          <label class="w-50">
+            <span class="titulo">SUPERVISOR</span>
+            <select id="select_supervisor">
+              <option value="NULL" selected>Não vincular</option>
+            </select>
+          </label>
+
+        </div>
+        <div class="acoesModal">
+          <div></div>
+          <div style="display: flex;">
+            <button class="btn-branco" onclick="fecharModal(2)">
+              Cancelar
+            </button>
+            <button class="btn-azul" onclick="alterarDados(2)">
+              Confirmar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="fundoModal" id="modalAdicionar">
+    <div class="modal modalUsuario modalEditar">
+      <header>
+        <div>
+          <h2>Adicionar usuários</h2>
+          <span class="subTitulo">Adicionar novo contribuidor para a equipe</span>
+        </div>
+        <div>
+          <button onclick="fecharModal(4)">
+            X
+          </button>
+        </div>
+      </header>
+      <div class="conteudo-usuario">
+        <div class="dados-perfil">
+          <div class="usuario">
+            <div class="perfil">
+              AT
+            </div>
+            <div>
+              <h1>Novo Usuário</h1>
+            </div>
+          </div>
+        </div>
+        <div class="dados-gerais dados-gerais-form">
+
+          <label class="w-50">
+            <span class="titulo">E-MAIL</span>
+            <input type="text" id="input_cad_email" value="" placeholder="geraldo@atmos.com">
+          </label>
+
+          <label class="w-50">
+            <span class="titulo">NOME</span>
+            <input type="text" id="input_cad_nome" value="" placeholder="Geraldo Atmos">
+          </label>
+
+          <label class="w-33">
+            <span class="titulo">CPF/DOC. IDENTIFICAÇÃO</span>
+            <input type="text" id="input_cad_doc_indentificacao" value="" oninput="formatarCPF(this)" placeholder="000.000.000-01">
+          </label>
+
+          <label class="w-33">
+            <span class="titulo">SENHA PROVISÓRIA</span>
+            <input type="text" id="input_cad_senha" value="" placeholder="Atmos@123*">
+          </label>
+
+          <label class="w-33">
+            <span class="titulo">DATA DE NASCIMENTO</span>
+            <input type="date" id="input_cad_data_nasc" value="">
+          </label>
+
+          <label class="w-33">
+            <span class="titulo">TIPO DE ACESSO</span>
+            <select id="select_cad_tipo_acesso">
+              <option value="Gestor">Gestor</option>
+              <option value="Funcionario" selected>Contribuidor</option>
+            </select>
+          </label>
+
+          <label class="w-33">
+            <span class="titulo">SETOR</span>
+            <select id="select_cad_setor">
+              <option value="Dados">Dados</option>
+              <option value="Infraestrutura">Infraestrutura</option>
+              <option value="TI">TI</option>
+            </select>
+          </label>
+
+          <label class="w-33">
+            <span class="titulo">STATUS</span>
+            <select id="select_cad_status">
+              <option value="Ativo" selected>Ativo</option>
+              <option value="Inativo">Inativo</option>
+            </select>
+          </label>
+
+        </div>
+        <div class="acoesModal">
+          <div></div>
+          <div style="display: flex;">
+            <button class="btn-branco" onclick="fecharModal(4)">
+              Cancelar
+            </button>
+            <button class="btn-azul" onclick="cadastrar(4)">
+              Confirmar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>
+<!-- Scripts Funcionais -->
+<script src="../assets/javascript/datetime.js"></script>
+<script src="../assets/javascript/menu.js"></script>
+<script src="../assets/javascript/sessao.js"></script>
+
+<!-- Graficos -->
+<script>
+  // grafico de distribuição dos usuários
+  // const distribuicaoUsuarios = document.getElementById("distribuicaoUsuarios")
+  // new Chart(distribuicaoUsuarios, {
+  //   type: 'doughnut',
+  //   data: {
+  //     labels: ['Gestor', 'Analista'],
+  //     datasets: [{
+  //       label: 'Quantidade',
+  //       data: [6, 28],
+  //       borderWidth: 1,
+  //       backgroundColor: ["#00367A", "#0093CA"]
+  //     }],
+  //   },
+  //   options: {
+  //     scales: {
+  //       y: {
+  //         beginAtZero: true,
+  //         grid: {
+  //           display: false
+  //         },
+  //         border: {
+  //           display: false,
+  //         },
+  //         ticks: {
+  //           display: false
+  //         }
+  //       },
+  //       x: {
+  //         grid: {
+  //           display: false
+  //         },
+  //         border: {
+  //           display: false
+  //         },
+  //         ticks: {
+  //           display: false
+  //         }
+  //       }
+  //     },
+  //     cutout: "70%",
+  //     responsive: true,
+  //     maintainAspectRatio: false
+  //   }
+  // });
+
+  // Grafico Crescimento de Usuários
+  // const crescimentoUsuario = document.getElementById("crescimentoUsuario")
+  // new Chart(crescimentoUsuario,
+  //   {
+  //     data: {
+  //       datasets: [
+  //         {
+  //           label: 'Usuários Ativos',
+  //           data: [12, 15, 20, 25, 30, 35],
+  //           type: 'line',
+  //           borderColor: '#00367A',
+  //           order: 1,
+  //           tension: 0.2,
+  //         }, {
+  //           label: 'Cadastros Novos',
+  //           data: [4, 4, 4, 6, 4, 3],
+  //           type: 'line',
+  //           borderColor: '#0093CA',
+  //           order: 2,
+  //           borderDash: [5, 5],
+  //           tension: 0.2,
+  //         },
+
+  //       ],
+  //       labels: ['Out', 'Nov', 'Dez', 'Jan', 'Fev', 'Mar']
+  //     },
+  //     options: {
+  //       responsive: true,
+  //       maintainAspectRatio: false
+  //     }
+  //   }
+  // )
+
+  // function graficoDistribuicao(qtdGestor, qtdAnalista) {
+  //   var graficoDistribuicao = Chart.getChart('distribuicaoUsuarios')
+  //   graficoDistribuicao.data.datasets[0].data[0] = qtdGestor
+  //   graficoDistribuicao.data.datasets[0].data[1] = qtdAnalista
+  //   graficoDistribuicao.update()
+  // }
+
+</script>
+
+<!-- modal -->
+<script>
+
+  function formatarCPF(input) {
+  let valor = input.value.replace(/\D/g, "");
+
+  valor = valor.substring(0, 11);
+  valor = valor.replace(/(\d{3})(\d)/, "$1.$2");
+  valor = valor.replace(/(\d{3})\.(\d{3})(\d)/, "$1.$2.$3");
+  valor = valor.replace(/(\d{3})\.(\d{3})\.(\d{3})(\d)/, "$1.$2.$3-$4");
+
+  input.value = valor;
+}
+  function desativarUsuario(idUsuario) {
+    var modal = document.getElementById('modalDesativarUsuario')
+    modal.style.display = 'flex'
+    document.getElementById('input_modal_desativar_id_usuario').value = idUsuario
+  }
+
+  function ativarUsuario(idUsuario) {
+    var modal = document.getElementById('modalAtivarUsuario')
+    modal.style.display = 'flex'
+    document.getElementById('input_modal_ativar_id_usuario').value = idUsuario
+  }
+
+  function fecharModal(tipoModal) {
+    const modal = document.getElementsByClassName("fundoModal")
+    modal[tipoModal].style.display = 'none';
+  }
+
+  function detalhes(posicaoUsuario) {
+    var idEmpresa = sessionStorage.FKEMPRESA
+    fetch(`/usuarios/listarColaboradoresEmpresa/${idEmpresa}`)
+      .then(function (res) {
+        return res.json();
+      })
+      .then(function (usuarios) {
+        var usuario = usuarios[posicaoUsuario]
+        var etiquetaAcesso = ''
+        var etiquetaStatus = ''
+        var nomeSuperior = ''
+        var buttonAtualizar = ''
+        if (usuario.tipoUsuario == 'Gestor') {
+          etiquetaAcesso = `etiqueta-azul`
+        } else {
+          etiquetaAcesso = `etiqueta-laranja`
+        }
+        if (usuario.statusUsuario == 'Ativo') {
+          etiquetaStatus = `etiqueta-verde`
+
+        } else {
+          etiquetaStatus = `etiqueta-vermelha`
+        }
+        if (usuario.nomeSupevisor != null) {
+          nomeSuperior = usuario.nomeSupevisor
+        } else {
+          nomeSuperior = "Não possui"
+        }
+        if (usuario.nome != sessionStorage.NOME_USUARIO) {
+          buttonAtualizar = `
+          <button class="btn-azul" onclick="editarPerfil()"> Alterar dados </button>
+          `
+        }
+        var modalDetalhe =
+          `
+        <div class="modal modalUsuario">
+          <header>
+            <div>
+              <h2>Detalhes do Servidor</h2>
+              <span class="subTitulo">Detalhes do usuario ${usuario.nome}</span>
+            </div>
+            <div>
+              <button onclick="fecharModal(2)">
+                X
+              </button>
+            </div>
+          </header>
+          <div class="conteudo-usuario">
+            <div class="dados-perfil">
+              <div class="usuario">
+                <div class="perfil">
+                  ${usuario.nome.split(" ")[0].split("")[0] + usuario.nome.split(" ")[1].split("")[0]}
+                </div>
+                <div class="user">
+                  <h2 id="nome_usuario">${usuario.nome}</h2>
+                  <span class="etiqueta-semi-bold ${etiquetaAcesso}">● ${usuario.tipoUsuario}</span>
+                </div>
+              </div>
+              <div class="status">
+                <span class="etiqueta-semi-bold ${etiquetaStatus}">● ${usuario.statusUsuario}</span>
+              </div>
+            </div>
+            <div class="dados-gerais">
+              <div class="dados">
+                <span class="titulo">E-MAIL</span>
+                <span class="info">${usuario.email}</span>
+              </div>
+              <div class="dados">
+                <span class="titulo">SETOR</span>
+                <span class="info">${usuario.setor}</span>
+              </div>
+              <div class="dados">
+                <span class="titulo">EMPRESA</span>
+                <span class="info">${usuario.razaoSocial}</span>
+              </div>
+              <div class="dados">
+                <span class="titulo">CPF/DOC. IDENTIFICAÇÃO</span>
+                <span class="info">${usuario.cpf}</span>
+              </div>
+              <div class="dados">
+                <span class="titulo">DATA DE NASCIMENTO</span>
+                <span class="info">${new Date(usuario.dataNascimento).toLocaleDateString('pt-BR')}</span>
+              </div>
+              <div class="dados">
+                <span class="titulo">CONTA CRIADA EM</span>
+                <span class="info">${new Date(usuario.dataCadastro).toLocaleDateString('pt-BR')}</span>
+              </div>
+              <div class="dados">
+                <span class="titulo">SUPERVISOR</span>
+                <span class="info">${nomeSuperior}</span>
+              </div>
+            </div>
+            <div class="acoesModal">
+              <p>Última atualização:${new Date(usuario.dataAtualizacao).toLocaleString('pt-BR')}</p>
+              <input type="text" style="display: none;">
+              ${buttonAtualizar}
+            </div>
+          </div>
+        </div>
+        `
+        var modal = document.getElementById("modalDetalhesPerfil")
+        modal.style.display = 'flex'
+        modal.innerHTML = modalDetalhe
+
+        var superiores = '<option value="NULL" Selected>Não vincular</option>'
+        for (var i = 0; i < usuarios.length; i++) {
+          if (usuarios[i].tipoUsuario == 'Gestor' && usuarios[i].nome != usuario.nome) {
+            superiores += `
+            <option value="${usuarios[i].idUsuario}">${usuarios[i].nome}</option>
+            `
+          }
+        }
+        input_id_usuario.value = usuario.idUsuario
+        input_email.value = usuario.email
+        input_nome.value = usuario.nome
+        input_doc_indentificacao.value = usuario.cpf
+        select_supervisor.innerHTML = superiores
+      });
+  }
+
+  function editarPerfil() {
+    var modal = document.getElementById("modalEditarPerfil")
+    modal.style.display = 'flex'
+  }
+
+  function alterarDados() {
+    var idUsuario = document.getElementById('input_id_usuario').value
+    var email = document.getElementById('input_email').value
+    var docIndentificacao = document.getElementById('input_doc_indentificacao').value
+    var nome = document.getElementById('input_nome').value
+    var dataNasc = document.getElementById('input_data_nasc').value
+    var tipoAcesso = document.getElementById('select_tipo_acesso').value
+    var fkSupervisor = document.getElementById('select_supervisor').value
+
+    if (
+      idUsuario == null ||
+      email == null ||
+      docIndentificacao == null ||
+      nome == null ||
+      dataNasc == null ||
+      tipoAcesso == null ||
+      fkSupervisor == null
+    ) {
+      alert('erro')
+      console.log('Erro')
+    } else {
+      fetch('/usuarios/atualizarDadosContribuidor', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          idUsuarioServer: idUsuario,
+          emailServer: email,
+          docIndentificacaoServer: docIndentificacao,
+          nomeServer: nome,
+          dataNascServer: dataNasc,
+          tipoAcessoServer: tipoAcesso,
+          fkSupervisorServer: fkSupervisor
+        })
+      })
+        .then(resposta => {
+          console.log(resposta)
+          if (resposta.ok) {
+            resposta.json().then((json) => {
+              console.log('OK')
+              fecharModal(2)
+              fecharModal(3)
+              listarUsuario()
+            });
+          } else {
+            console.log("Houve um erro ao atualizar os dados do usuario");
+            resposta.text().then(texto => {
+              console.error(texto);
+            });
+          }
+        }).catch(function (erro) {
+          console.log(erro);
+        })
+
+    }
+  }
+
+  function adicionarUsuario() {
+    var modalAdicionar = document.getElementById('modalAdicionar')
+    modalAdicionar.style.display = 'flex'
+  }
+
+  function cadastrar() {
+    var nomeVar = input_cad_nome.value.trim();
+    var emailVar = input_cad_email.value.trim();
+    var cpfVar = input_cad_doc_indentificacao.value.trim();
+    var dataNascimentoVar = input_cad_data_nasc.value.trim();
+    var idEmpresaVar = sessionStorage.FKEMPRESA;
+    var statusVar = select_cad_status.value;
+    var papelVar = select_cad_tipo_acesso.value.trim();
+    var senhaVar = input_cad_senha.value;
+    var equipeVar = select_cad_setor.value;
+
+    if (nomeVar == "" ||
+      emailVar == "" ||
+      papelVar == "" ||
+      equipeVar == "" ||
+      cpfVar == "" ||
+      dataNascimentoVar == "" ||
+      idEmpresaVar == "" ||
+      statusVar == "" ||
+      senhaVar == "") {
+      mostrarErro("Por favor verifique os campos novamente e confira se todos estão preenchidos corretamente!");
+    }
+    fetch("/usuarios/cadastrarColaborador", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        nomeServer: nomeVar,
+        emailServer: emailVar,
+        papelServer: papelVar,
+        equipeServer: equipeVar,
+        cpfServer: cpfVar.replace(/\D/g, ""),
+        dataNascimentoServer: dataNascimentoVar,
+        idEmpresaServer: idEmpresaVar,
+        statusServer: statusVar,
+        senhaServer: senhaVar,
+      }),
+    })
+      .then(function (resposta) {
+        if (resposta.ok) {
+          mostrarSucessoDash("Colaborador cadastrado com sucesso!")
+          setTimeout(function () {
+            fecharModal(4)
+            limparFormulario();
+            listarUsuario()
+          }, 2000);
+        } else {
+          throw "Erro no cadastro de colaborador";
+          mostrarErroDasy("Erro ao cadastrar colaborador");
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#Erro: ${resposta}`);
+      });
+    return false;
+  }
+
+  function limparFormulario() {
+    input_cad_nome.value = ''
+    input_cad_email.value = ''
+    input_cad_doc_indentificacao.value = ''
+    input_cad_data_nasc.value = ''
+    select_cad_status.value = ''
+    select_cad_tipo_acesso.value = ''
+    input_cad_senha.value = ''
+    select_cad_setor.value = ''
+  }
+
+
+</script>
+
+<!-- manipulação de usuario -->
+<script>
+  async function listarUsuario() {
+    var idEmpresa = sessionStorage.FKEMPRESA
+    fetch(`/usuarios/listarColaboradoresEmpresa/${idEmpresa}`)
+      .then(function (res) {
+        return res.json();
+      })
+      .then(function (usuarios) {
+        var listaColaboradores = document.getElementById("tabela_colaboradores");
+        if (usuarios.length == 0) {
+          listaColaboradores.innerHTML = "<p> Nenhum usuario cadastrado </p>";
+          return;
+        }
+        var tabelaColaboradoresCadastrados = "";
+        var etiquetaAcesso = ''
+        var etiquetaStatus = ''
+        var qtdGestor = 0
+        var qtdAnalista = 0
+
+        // KPI
+        var totalMembrosAtivos = 0
+        var totalMembrosInativos = 0
+        var membrosAdicionados = 0
+        var supervisor = []
+        var qtdSupervisor = 0
+        for (var i = 0; i < usuarios.length; i++) {
+          var usuario = usuarios[i]
+          var dataAtual = new Date()
+          if (new Date(usuario.dataCadastro).getMonth() == dataAtual.getMonth() &&
+            new Date(usuario.dataCadastro).getFullYear() == dataAtual.getFullYear()
+          ) {
+            membrosAdicionados++
+          }
+          if(usuario.nomeSupevisor != null && !supervisor.includes(usuario.nomeSupevisor)){
+            supervisor[qtdSupervisor] = usuario.nomeSupevisor
+            qtdSupervisor++
+          }
+          if (usuario.tipoUsuario == 'Gestor') {
+            etiquetaAcesso = `etiqueta-azul`
+            qtdGestor++;
+            // superiores += ` <option value="${usuarios[i].idUsuario}">${usuarios[i].nome}</option> `
+          } else {
+            etiquetaAcesso = `etiqueta-laranja`
+            qtdAnalista++
+          }
+          if (usuario.statusUsuario == 'Ativo') {
+            etiquetaStatus = `etiqueta-verde`
+            var button = `
+              <button class="btn-remover" onclick="desativarUsuario(${usuario.idUsuario})">inativar</button>
+            `
+            totalMembrosAtivos++
+          } else {
+            etiquetaStatus = `etiqueta-vermelha`
+            var button = `
+              <button class="btn-ativar" onclick="ativarUsuario(${usuario.idUsuario})">Ativar</button>
+            `
+            totalMembrosInativos++
+          }
+          tabelaColaboradoresCadastrados += `
+            <tr>
+                <td class="nomeUser">
+                  <div class="perfil">
+                    <span>${usuario.nome.split(" ")[0].split("")[0] + usuario.nome.split(" ")[1].split("")[0]}</span>
+                  </div>
+                  <span class="nome">
+                    ${usuario.nome}
+                  </span>
+                  <span>ID #${usuario.idUsuario}</span>
+                </td>
+                <td>
+                  <span>${usuario.email}</span>
+                </td>
+                <td>
+                  <span class="etiqueta ${etiquetaAcesso}">● ${usuario.tipoUsuario}</span>
+                </td>
+                <td>
+                  <span class="etiqueta ${etiquetaStatus}">● ${usuario.statusUsuario}</span>
+                </td>
+                <td>
+                  <span>${new Date(usuario.dataCadastro).toLocaleDateString('pt-BR')}</span>
+                </td>
+                <td>
+                  <button class="btn-detalhes" onclick="detalhes(${i})">Detalhes</button>
+                  ${button}
+                </td>
+              </tr>
+          `;
+        }
+        // document.getElementById('select_cad_supervisor').innerHTML = superiores
+        // kpi_1.innerText = totalMembrosAtivos
+        // kpi_2.innerText = totalMembrosInativos
+        // kpi_3.innerText = membrosAdicionados
+        // kpi_4.innerText = qtdSupervisor
+        // graficoDistribuicao(qtdGestor, qtdAnalista)
+        listaColaboradores.innerHTML = tabelaColaboradoresCadastrados;
+      });
+  }
+
+  function confirmarAlteracao(alteracao) {
+    var idUsuario
+    var modal
+    switch (alteracao) {
+      case "Inativo":
+        idUsuario = document.getElementById('input_modal_desativar_id_usuario').value
+        modal = 0
+        break;
+      case 'Ativo':
+        idUsuario = document.getElementById('input_modal_ativar_id_usuario').value
+        modal = 1
+        break;
+    }
+    fetch("/usuarios/alterarStatusColaborador", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        idUsuarioServer: idUsuario,
+        statusUsuarioServer: alteracao,
+      })
+    })
+      .then(resposta => {
+        console.log(resposta)
+        if (resposta.ok) {
+          resposta.json().then((json) => {
+            fecharModal(modal)
+            listarUsuario()
+          });
+        } else {
+          console.log("Houve um erro ao trocar o status do usuario");
+          resposta.text().then(texto => {
+            console.error(texto);
+          });
+        }
+      }).catch(function (erro) {
+        console.log(erro);
+      })
+
+  }
+
+  listarUsuario()
+</script>
+<script src="../assets/javascript/erros.js"></script>

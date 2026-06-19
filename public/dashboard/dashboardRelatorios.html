@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Servidor</title>
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/dashboard/dashboardServidores.css">
+    <link rel="stylesheet" href="../assets/css/dashboard/dashboardRelatorios.css">
+    <link rel="icon" href="../assets/icons/favicon.ico" type="image/x-icon" />
+
+    <!-- ChartJS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!--Google Fonts-->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet" />
+
+</head>
+
+<div id="editorModal"
+    style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:999;">
+
+    <div style="background:#fff; width:80%; max-width:900px; margin:5% auto; padding:20px; border-radius:10px;">
+
+        <h2>Criar Relatório</h2>
+
+        <div id="editorTexto" contenteditable="true"
+            style="border:1px solid #ccc; min-height:300px; padding:10px; margin-top:10px;">
+        </div>
+
+        <div style="margin-top:15px; display:flex; gap:10px;">
+            <button onclick="exportarRelatorioPDF()">Exportar PDF</button>
+            <button onclick="fecharEditor()">Fechar</button>
+        </div>
+
+    </div>
+</div>
+
+<body>
+    <nav class="sidebar" id="siderbar">
+        <div class="logo-container">
+            <a href="./dashboardAtmos.html" class="logo">
+                <div class="cicle"></div>
+                <span>ATMOS</span>
+            </a>
+        </div>
+
+        <ul class="nav-links">
+            <ul>
+                <li class="nav-category">
+                    <span>PRINCIPAL</span>
+                </li>
+                <li class="nav-item area-contribuidor">
+                    <a href="./dashboardAtmos.html">
+                        <img src="../assets/images/pc.svg" class="icon" alt="">
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li class="nav-item area-gestor">
+                    <a href="./dashboardAtmosGerente.html">
+                        <img src="../assets/images/pc.svg" class="icon" alt="">
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="./dashboardAlertasGerente.html">
+                        <img src="../assets/images/alert.svg" class="icon" alt="">
+                        <span>Alertas</span>
+                    </a>
+                </li>
+                <li class="nav-item nav-item-active area-gestor">
+                    <a href="./dashboardRelatorios.html">
+                        <img src="../assets/images/documentos.svg" class="icon" alt="">
+                        <span>Relatorios</span>
+                    </a>
+                </li>
+            </ul>
+            <ul>
+                <li class="nav-category">
+                    <span>INFRAESTRUTURA</span>
+                </li>
+                <li class="nav-item">
+                    <a href="./dashboardServidor.html">
+                        <img src="../assets/images/server.svg" class="icon" alt="">
+                        <span>Servidores</span>
+                    </a>
+                </li>
+                <li class="nav-item area-gestor">
+                    <a href="./dashboardEquipe.html">
+                        <img src="../assets/images/user.svg" class="icon" alt="">
+                        <span>Equipe</span>
+                    </a>
+                </li>
+            </ul>
+        </ul>
+
+        <div class="info-user" onclick="window.location.href = './dashboardPerfil.html'">
+            <div class="img-user" id="usarioimagem">
+                <img alt="A">
+            </div>
+            <div>
+                <h3><span id="usuarionome">usuário</span></h3>
+                <h5><span id="usuarioemail">email</span></h3>
+            </div>
+        </div>
+
+        <!--Menu mobile-->
+        <div class="menu" style="display: none" id="menu">
+            <div class="menu-container" id="menu-mobile">
+                <ul>
+                    <ul>
+                        <li class="nav-category">
+                            <span>PRINCIPAL</span>
+                        </li>
+                        <li class="nav-item area-contribuidor">
+                            <a href="./dashboardAtmos.html">
+                                <img src="../assets/images/pc.svg" class="icon" alt="">
+                                <span>Home</span>
+                            </a>
+                        </li>
+                        <li class="nav-item area-gestor">
+                            <a href="./dashboardAtmosGerente.html">
+                                <img src="../assets/images/pc.svg" class="icon" alt="">
+                                <span>Home</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="./dashboardAlertasGerente.html">
+                                <img src="../assets/images/alert.svg" class="icon" alt="">
+                                <span>Alertas</span>
+                            </a>
+                        </li>
+                        <li class="nav-item nav-item-active area-gestor">
+                            <a href="./dashboardRelatorios.html">
+                                <img src="../assets/images/documentos.svg" class="icon" alt="">
+                                <span>Relatorios</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li class="nav-category">
+                            <span>INFRAESTRUTURA</span>
+                        </li>
+                        <li class="nav-item">
+                            <a href="./dashboardServidor.html">
+                                <img src="../assets/images/server.svg" class="icon" alt="">
+                                <span>Servidores</span>
+                            </a>
+                        </li>
+                        <li class="nav-item area-gestor">
+                            <a href="./dashboardEquipe.html">
+                                <img src="../assets/images/user.svg" class="icon" alt="">
+                                <span>Equipe</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li class="nav-category">
+                            <span>Usuário</span>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="./dashboardPerfil.html">
+                                <img src="../assets/images/user.svg" class="icon" alt="">
+                                <span>Perfil</span>
+                            </a>
+                        </li>
+                    </ul>
+                </ul>
+            </div>
+        </div>
+        <!-- Menu Icon -->
+        <div class="container-menu">
+            <div class="menu-icon" id="menu-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <header>
+            <div class="infos">
+
+                <div class="screen-title">
+                    <ul class="breadcrumb">
+                        <li><a href="#">Principal</a></li>
+                        <li><a href="#"><span>Relatorios</span></a></li>
+                    </ul>
+                </div>
+
+                <div class="screen-infos">
+                    <div><span></span>Sistema Operacional</div>
+                    <span id="dataSistema"></span>
+                </div>
+            </div>
+
+            <div class="tela">
+
+                <div>
+                    <h1>Dashboard de Relatorios</h1>
+                    <span>Historico de relatorios gerados da empresa</span>
+                </div>
+
+                <div class="acoes">
+                    <button class="btn-adicionar" onclick="abrirEditorRelatorio()">
+                        <img src="../assets/images/icones/iconeAdd.svg" alt="add icon">RELATÓRIO
+                    </button>
+                </div>
+
+            </div>
+        </header>
+        <!-- 
+        <section>
+            <div class="secao-kpis">
+                <div class="titulos-kpi">
+                    <h3>Visão Geral</h3>
+                    <h4>Informações Gerais</h4>
+                </div>
+                <div class="conjunto-kpis">
+                    <div class="kpi">
+                        <h4>Quantidade de servidores</h4>
+                        <p>6</p>
+                        <span>Total de servidores</span>
+                    </div>
+                    <div class="kpi">
+                        <h4>Servidores Ativos</h4>
+                        <p>6</p>
+                        <span>Servidores ativos</span>
+                    </div>
+                    <div class="kpi">
+                        <h4>Alertas</h4>
+                        <p class="kpi-vermelho">0</p>
+                        <span>Alertas atuais</span>
+                    </div>
+                    <div class="kpi">
+                        <h4>Incidentes Registrados</h4>
+                        <p class="kpi-vermelho">6</p>
+                        <span>Registrados no mês</span>
+                    </div>
+                </div>
+            </div>
+        </section> -->
+
+        <section>
+            <div class="filtros-busca">
+                <div style="width: 100%;" class="barra-busca">
+                    <input style="width: 100%;" type="text" id="input_busca_por_nome"
+                        placeholder="Buscar servidor por nome ou ID...">
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="tabela">
+                <h4>Lista de Servidores</h4>
+                <div class="tabela-servidores">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Data</th>
+                                <th>Tipo</th>
+                                <th>Responsavel</th>
+                                <th>Baixar</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabela_lista_servidor">
+                            <tr>
+                                <td>
+                                    <span>
+                                        RelatorioMensalDeOcorrencias.pdf
+                                    </span>
+                                </td>
+                                <td>
+                                    <span>06/05/2026 19:54:30</span>
+                                </td>
+                                <td>
+                                    <span class="etiqueta etiqueta-azul">Sistema</span>
+                                </td>
+                                <td>
+                                    <span>Sistema Atmos</span>
+                                </td>
+                                <td>
+                                    <button class="btn-detalhes" onclick="baixarRelatorio()">Baixar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>
+                                        RelatorioServidor-LAPTOP-LUANA.pdf
+                                    </span>
+                                </td>
+                                <td>
+                                    <span>04/05/2026 10:07:49</span>
+                                </td>
+                                <td>
+                                    <span class="etiqueta etiqueta-roxo">Colaborador</span>
+                                </td>
+                                <td>
+                                    <span>Lucas Mendes</span>
+                                </td>
+                                <td>
+                                    <button class="btn-detalhes" onclick="baixarRelatorioServidor()">Baixar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>
+                                        DadosServidores-semana-04/05/2026.csv
+                                    </span>
+                                </td>
+                                <td>
+                                    <span>10/04/2026 21:34:57</span>
+                                </td>
+                                <td>
+                                    <span class="etiqueta etiqueta-azul">Sistema</span>
+                                </td>
+                                <td>
+                                    <span>Sistema Atmos</span>
+                                </td>
+                                <td>
+                                    <button class="btn-detalhes" onclick="baixarRelatorioCsv()">Baixar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+
+                </div>
+                <div class="paginacao">
+                    <!-- <button>1</button>
+                    <button>2</button> -->
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>
+<!-- Scripts Funcionais -->
+<script src="../assets/javascript/datetime.js"></script>
+<script src="../assets/javascript/menu.js"></script>
+<script src="../assets/javascript/sessao.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+    function baixarServidor() {
+        const { jsPDF } = window.jspdf;
+
+        const doc = new jsPDF();
+
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(18);
+        doc.text("Relatório ATMOS", 20, 20);
+        doc.setLineWidth(0.5);
+        doc.line(20, 25, 190, 25);
+
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(12);
+
+        doc.text("Nome: RelatorioAtmos-26-04-2026-19-54.pdf", 20, 40);
+        doc.text("Data: 26/04/2026 19:54:30", 20, 50);
+        doc.text("Tipo: Sistema", 20, 60);
+        doc.text("Responsável: Sistema Atmos", 20, 70);
+        doc.setFontSize(10);
+        doc.text("Gerado automaticamente pelo sistema ATMOS", 20, 280);
+        doc.save("relatorio-atmos.pdf");
+    }
+
+    function abrirEditorRelatorio() {
+        document.getElementById("editorModal").style.display = "block";
+    }
+
+    function fecharEditor() {
+        document.getElementById("editorModal").style.display = "none";
+    }
+
+    function exportarRelatorioPDF() {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+
+        const conteudo = document.getElementById("editorTexto").innerText;
+
+        const linhas = doc.splitTextToSize(conteudo, 170);
+
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(12);
+
+        doc.text(linhas, 20, 20);
+
+        doc.save("relatorio-personalizado.pdf");
+    }
+
+    function baixarRelatorio() {
+        const link = document.createElement('a');
+
+        link.href = '../assets/template/Relatório Mensal de Ocorrências_ empresaX.pdf';
+        link.download = 'RelatorioMensalDeOcorrencias.pdf';
+
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+
+    function baixarRelatorioServidor() {
+        const link = document.createElement('a');
+        link.href = '../assets/template/RELATÓRIO MENSAL DE DESEMPENHO DO SERVIDOR METEOROLÓGICO (1).pdf';
+        link.download = 'RelatorioServidor-LAPTOP-LUANA.pdf';
+
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+
+    function baixarRelatorioCsv() {
+        const link = document.createElement('a');
+        link.href = '../assets/template/trusted_empresaX (3).csv';
+        link.download = 'DadosServidores-semana-04/05/2026.csv';
+
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+
+
+</script>

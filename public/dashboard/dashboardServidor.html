@@ -2,61 +2,521 @@
 <html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Servidor</title>
-    <link rel="stylesheet" href="../assets/css/dashboard.css">
-    <link rel="icon" href="../assets/icons/favicon.ico" type="image/x-icon" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Servidor</title>
+  <link rel="stylesheet" href="../assets/css/dashboard.css">
+  <link rel="stylesheet" href="../assets/css/dashboard/dashboardServidores.css">
+  <link rel="icon" href="../assets/icons/favicon.ico" type="image/x-icon" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+  <script src="../assets/javascript/erros.js"></script>
 </head>
 
 <body>
-
-    <nav class="sidebar">
-        <div class="logo-container">
-            <a href="../index.html" class="logo">ATMOS</a>
-        </div>
-
-        <ul class="nav-links">
-
-            <li class="nav-item"> <a href="./dashboardAtmos.html">
-                    <img src="../assets/images/pc.svg" class="icon" alt="">
-                    <span>Overview</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="#">
-                    <img src="../assets/images/alert.svg" class="icon" alt="">
-                    <span>Alertas</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="#">
-                    <img src="../assets/images/server.svg" class="icon" alt="">
-                    <span>Servidores</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="./dashboardUsuario.html">
-                    <img src="../assets/images/user.svg" class="icon" alt="">
-                    <span>Usuários</span>
-                </a>
-            </li>
+  <!-- SIDEBAR -->
+  <nav class="sidebar" id="siderbar">
+    <div class="logo-container">
+      <a href="./dashboardAtmos.html" class="logo">
+        <div class="cicle"></div>
+        <span>ATMOS</span>
+      </a>
+    </div>
+    <ul class="nav-links">
+      <ul>
+        <li class="nav-category"><span>PRINCIPAL</span></li>
+        <li class="nav-item area-contribuidor">
+          <a href="./dashboardAtmos.html"><img src="../assets/images/pc.svg" class="icon" alt=""><span>Home</span></a>
+        </li>
+        <li class="nav-item area-gestor">
+          <a href="./dashboardAtmosGerente.html"><img src="../assets/images/pc.svg" class="icon" alt=""><span>Home</span></a>
+        </li>
+        <li class="nav-item area-contribuidor">
+          <a href="./dashboardAlertas.html"><img src="../assets/images/alert.svg" class="icon" alt=""><span>Alertas</span></a>
+        </li>
+        <li class="nav-item area-gestor">
+          <a href="./dashboardAlertasGerente.html"><img src="../assets/images/alert.svg" class="icon" alt=""><span>Alertas</span></a>
+        </li>
+        <li class="nav-item area-gestor">
+          <a href="./dashboardRelatorios.html"><img src="../assets/images/documentos.svg" class="icon" alt=""><span>Relatórios</span></a>
+        </li>
+      </ul>
+      <ul>
+        <li class="nav-category"><span>INFRAESTRUTURA</span></li>
+        <li class="nav-item nav-item-active">
+          <a href="./dashboardServidor.html"><img src="../assets/images/server.svg" class="icon" alt=""><span>Servidores</span></a>
+        </li>
+        <li class="nav-item area-gestor">
+          <a href="./dashboardEquipe.html"><img src="../assets/images/user.svg" class="icon" alt=""><span>Equipe</span></a>
+        </li>
+      </ul>
+    </ul>
+    <div class="info-user" onclick="window.location.href = './dashboardPerfil.html'">
+      <div class="img-user" id="usarioimagem"><img alt="A"></div>
+      <div>
+        <h3><span id="usuarionome">usuário</span></h3>
+        <h5><span id="usuarioemail">email</span></h5>
+      </div>
+    </div>
+    <div class="menu" style="display: none" id="menu">
+      <div class="menu-container" id="menu-mobile">
+        <ul>
+          <ul>
+            <li class="nav-category"><span>PRINCIPAL</span></li>
+            <li class="nav-item area-contribuidor"><a href="./dashboardAtmos.html"><img src="../assets/images/pc.svg" class="icon" alt=""><span>Home</span></a></li>
+            <li class="nav-item area-gestor"><a href="./dashboardAtmosGerente.html"><img src="../assets/images/pc.svg" class="icon" alt=""><span>Home</span></a></li>
+            <li class="nav-item"><a href="./dashboardAlertas.html"><img src="../assets/images/alert.svg" class="icon" alt=""><span>Alertas</span></a></li>
+            <li class="nav-item area-gestor"><a href="./dashboardRelatorios.html"><img src="../assets/images/documentos.svg" class="icon" alt=""><span>Relatórios</span></a></li>
+          </ul>
+          <ul>
+            <li class="nav-category"><span>INFRAESTRUTURA</span></li>
+            <li class="nav-item nav-item-active"><a href="./dashboardServidor.html"><img src="../assets/images/server.svg" class="icon" alt=""><span>Servidores</span></a></li>
+            <li class="nav-item area-gestor"><a href="./dashboardEquipe.html"><img src="../assets/images/user.svg" class="icon" alt=""><span>Equipe</span></a></li>
+          </ul>
+          <ul>
+            <li class="nav-category"><span>Usuário</span></li>
+            <li class="nav-item"><a href="./dashboardPerfil.html"><img src="../assets/images/user.svg" class="icon" alt=""><span>Perfil</span></a></li>
+          </ul>
         </ul>
-        <div class="info-user">
-            <h3><span id="usuarionome">usuário</span></h3>
-            <h5><span id="usuarioemail">usuário</span></h3>
+      </div>
+    </div>
+    <div class="container-menu">
+      <div class="menu-icon" id="menu-icon"><span></span><span></span><span></span></div>
+    </div>
+  </nav>
+
+  <main class="dash-main">
+
+    <!-- HEADER -->
+    <header class="dash-header">
+      <div class="dash-header-left">
+        <ul class="breadcrumb">
+          <li><a href="#">Infraestrutura</a></li>
+          <li><a href="#"><span>Servidores</span></a></li>
+        </ul>
+      </div>
+      <div class="dash-header-right">
+        <div class="dash-sys-info">
+          <div><span></span>Sistema Operacional</div>
+          <span id="dataSistema"></span>
+        </div>
+        <button id="button_adcServidor" class="btn-adicionar" onclick="adicionarServidor()">
+          <img src="../assets/images/icones/iconeAdd.svg" alt="add icon">
+          NOVO SERVIDOR
+        </button>
+      </div>
+    </header>
+
+    <!-- FAIXA DE ALERTAS ATIVOS — sempre visível, topo do conteúdo -->
+    <div class="faixa-alertas" id="faixaAlertas">
+      <div class="faixa-alertas-left">
+        <span class="faixa-alertas-icone">⚠</span>
+        <span class="faixa-alertas-titulo">ALERTAS ATIVOS</span>
+        <span class="faixa-alertas-badge" id="faixaAlertasBadge">4</span>
+      </div>
+      <div class="faixa-alertas-lista" id="faixaAlertasLista">
+        <span class="alerta-pill alerta-pill-alto">LAPTOP-LUANA · CPU · Alto</span>
+        <span class="alerta-pill alerta-pill-medio">LAPTOP-LUANA · RAM · Médio</span>
+        <span class="alerta-pill alerta-pill-medio">LAPTOP-LUIZ · CPU · Médio</span>
+        <span class="alerta-pill alerta-pill-baixo">LAPTOP-MATHEUS · DISCO · Baixo</span>
+      </div>
+      <button class="faixa-alertas-toggle" id="faixaAlertasToggle" onclick="toggleFaixaAlertas()">▲ Ocultar</button>
+    </div>
+
+    <!-- BODY: 2 COLUNAS -->
+    <div class="dash-body">
+
+      <!-- COLUNA ESQUERDA: painel do servidor selecionado -->
+      <div class="col-esquerda">
+        
+
+        <!-- Cabeçalho do servidor -->
+        <div class="bloco-servidor-header">
+          <div class="servidor-cabecalho">
+            <div class="servidor-ident">
+              <div class="servidor-icon">
+                <img src="../assets/images/server.svg" alt="#">
+              </div>
+              <div>
+                <h2 id="modal_detalhe_nome_servidor">--</h2>
+                <span id="modal_cabecalho_indicador">Selecione um servidor na lista</span>
+                
+              </div>
+            </div>
+            <div class="status-badge">
+              <span>● Online</span>
+            </div>
+          </div>
+
+          <!-- KPIs CPU / RAM / Disco com threshold semântico -->
+          <div class="kpis-servidor-grid">
+            <div class="kpi-servidor-card" id="card_cpu">
+              <div class="kpi-srv-top">
+                <span class="kpi-srv-label">CPU</span>
+                <span class="kpi-srv-valor" id="modal_detalhe_uso_cpu">--%</span>
+                <span class="kpi-threshold-hint">⚠ ≥80%</span>
+              </div>
+              <div class="barra-wrapper">
+                <div class="barra">
+                  <div class="preenchimento" id="modal_detalhe_preenchimento_cpu"></div>
+                </div>
+              </div>
+            </div>
+            <div class="kpi-servidor-card" id="card_ram">
+              <div class="kpi-srv-top">
+                <span class="kpi-srv-label">RAM</span>
+                <span class="kpi-srv-valor" id="modal_detalhe_uso_ram">--%</span>
+                <span class="kpi-threshold-hint">⚠ ≥75%</span>
+              </div>
+              <div class="barra-wrapper">
+                <div class="barra">
+                  <div class="preenchimento" id="modal_detalhe_preenchimento_ram"></div>
+                </div>
+              </div>
+            </div>
+            <!-- Disco  -->
+            <div class="kpi-servidor-card" id="card_disco">
+              <div class="kpi-srv-top">
+                <span class="kpi-srv-label">Disco</span>
+                <div class="disco-valores">
+                  <span class="kpi-srv-valor" id="modal_detalhe_uso_disco">---</span>
+                  <span class="disco-total-inline">/ <span id="modal_info_disco">--</span></span>
+                </div>
+                <span class="kpi-threshold-hint">⚠ ≥85%</span>
+              </div>
+              <div class="barra-wrapper">
+                <div class="barra">
+                  <div class="preenchimento" id="modal_detalhe_preenchimento_disco"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Métricas secundárias com contexto -->
+          <div class="infos-adicionais-row">
+            <div class="info-mini-card">
+              <span class="mini-label">Temperatura</span>
+              <div class="mini-valor-row">
+                <span class="mini-valor" id="modal_info_temperatura">--</span>
+                <span class="mini-status-dot" id="dot_temperatura" title="Normal (≤85°C)">●</span>
+              </div>
+              <span class="mini-threshold">normal ≤85°C</span>
+            </div>
+            <div class="info-mini-card">
+              <span class="mini-label">Processos</span>
+              <div class="mini-valor-row">
+                <span class="mini-valor" id="modal_info_processos">--</span>
+                <span class="mini-trend" id="trend_processos"></span>
+              </div>
+              <span class="mini-threshold">ativos agora</span>
+            </div>
+            <div class="info-mini-card">
+              <span class="mini-label">Conexão TCP</span>
+              <div class="mini-valor-row">
+                <span class="mini-valor" id="modal_info_conexao_tcp">--</span>
+              </div>
+              <span class="mini-threshold">conexões ativas</span>
+            </div>
+            <div class="info-mini-card">
+              <span class="mini-label">Uptime</span>
+              <div class="mini-valor-row">
+                <span class="mini-valor">42h13m</span>
+              </div>
+              <span class="mini-threshold">desde último boot</span>
+            </div>
+            
+          </div>
+         <!-- Botões de ação com hierarquia -->
+        <div class="bloco-botoes-acoes">
+          <div class="botoes">
+            <button class="acao acao-primaria" onclick="redirecionar()">Análise de Carga</button>
+            <button class="acao acao-primaria" onclick="redirecionar()">Análise do Servidor</button>
+            <button class="acao acao-secundaria" onclick="redirecionar()">Processos</button>
+            <button class="acao acao-secundaria" onclick="redirecionar()">Gerar Relatório</button>
+          </div>
+        </div>
         </div>
 
-    </nav>
+        <!-- Gráfico unificado-->
+        <div class="bloco-grafico-unificado">
+          <div class="grafico-header">
+            <span class="grafico-titulo">Performance do Servidor</span>
+            <div class="grafico-toggles">
+              <button class="toggle-metrica ativo" data-metrica="ram" onclick="toggleMetrica('ram', this)">RAM</button>
+              <button class="toggle-metrica ativo" data-metrica="cpu" onclick="toggleMetrica('cpu', this)">CPU</button>
+              <button class="toggle-metrica ativo" data-metrica="disco" onclick="toggleMetrica('disco', this)">Disco</button>
+              <button class="toggle-metrica ativo" data-metrica="processos" onclick="toggleMetrica('processos', this)">Processos</button>
+            </div>
+          </div>
+          <div class="grafico-wrapper-unico">
+            <canvas id="perfomaInfra"></canvas>
+          </div>
+        </div>
 
+        <!-- Botões de ação com hierarquia !-->
+<!--         <div class="bloco-botoes-acoes">
+          <div class="botoes">
+            <button class="acao acao-primaria" onclick="redirecionar()">Análise de Carga</button>
+            <button class="acao acao-primaria" onclick="redirecionar()">Análise do Servidor</button>
+            <button class="acao acao-secundaria" onclick="redirecionar()">Processos</button>
+            <button class="acao acao-secundaria" onclick="redirecionar()">Gerar Relatório</button>
+          </div>
+        </div> -->
 
+      </div><!-- /col-esquerda -->
+
+      <!-- COLUNA DIREITA -->
+      <div class="col-direita">
+
+        <!-- KPIs da frota -->
+        <div class="bloco-kpis-gerais">
+          <div class="bloco-titulo">
+            <h3>Visão Geral</h3>
+            <span>Infraestrutura · 6 servidores</span>
+          </div>
+          <div class="grid-kpis">
+            <div class="kpi-card">
+              <div class="kpi-icon kpi-icon-blue">0</div>
+              <div class="kpi-info">
+                <span class="kpi-label">Inativos</span>
+                <p class="kpi-valor">0<span class="kpi-de-total">/6</span></p>
+              </div>
+            </div>
+            <div class="kpi-card kpi-card-critico">
+              <div class="kpi-icon kpi-icon-red">2</div>
+              <div class="kpi-info">
+                <span class="kpi-label">Críticos</span>
+                <p class="kpi-valor"><span style="color:#dc2626">2</span><span class="kpi-de-total">/6</span></p>
+                <button class="btn-filtro-kpi" onclick="filtrarStatus('Critico')">↗ Ver críticos</button>
+              </div>
+            </div>
+            <div class="kpi-card kpi-card-alerta">
+              <div class="kpi-icon kpi-icon-yellow">4</div>
+              <div class="kpi-info">
+                <span class="kpi-label">Alertas</span>
+                <p class="kpi-valor"><span style="color:#d97706">4</span><span class="kpi-de-total">/6</span></p>
+                <button class="btn-filtro-kpi" onclick="filtrarStatus('Atencao')">↗ Ver alertas</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lista de Servidores -->
+        <div class="bloco-lista-servidores">
+          <div class="lista-header">
+            <h4>Lista de Servidores</h4>
+            <div class="filtros-inline">
+              <input type="text" id="input_busca_por_nome" placeholder="Buscar por nome ou ID...">
+              <select name="filtroStatus" id="filtroStatus">
+                <option value="">Status</option>
+                <option value="Operando">Operando</option>
+                <option value="Atenção">Atenção</option>
+                <option value="Critico">Crítico</option>
+              </select>
+              <select name="filtroSistema" id="filtroSistema">
+                <option value="">Sistema</option>
+                <option value="Ubuntu">Ubuntu</option>
+                <option value="Windows">Windows</option>
+              </select>
+              <button id="btnVerMais" class="btn-ver-mais">Ver mais</button>
+            </div>
+          </div>
+          <div class="div-metrica">
+            <span class="etiqueta-bold etiqueta-vermelha">● Crítico</span>
+            <span class="etiqueta-bold etiqueta-amarela">● Atenção</span>
+            <span class="etiqueta-bold etiqueta-verde">● Operando</span>
+          </div>
+
+          <div class="tabela-scroll">
+            <table id="tabelaServidores" class="ocultar-extra">
+              <thead>
+                <tr>
+                  <th>Status</th>
+                  <th>Nome</th>
+                  <th class="coluna-extra">IP</th>
+                  <th class="coluna-extra">SO</th>
+                  <th>CPU</th>
+                  <th>RAM</th>
+                  <th>Disco</th>
+                  <th class="coluna-extra">Uptime</th>
+                </tr>
+              </thead>
+              <tbody id="tabela_lista_servidor">
+                <!-- preenchido via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div><!-- /col-direita -->
+    </div><!-- /dash-body -->
+  </main>
+
+  <!--Adicionar Servidor -->
+  <div class="fundoModal" id="modalAdicionarServidor">
+    <div class="modal cadModal">
+      <header>
+        <div>
+          <h2>Cadastro de Servidor</h2>
+          <span class="subTitulo">Cadastre um novo servidor</span>
+        </div>
+        <div><button onclick="fecharModal(0)">X</button></div>
+      </header>
+      <div class="conteudo-interativo">
+        <div class="infosCad">
+          <h3>Informações Gerais</h3>
+          <div class="inputs">
+            <label class="w-50"><span>Nome de identificação</span><input id="input_nome_identificacao" type="text" placeholder="SERV-PROD-02"></label>
+            <label class="w-50"><span>Número de identificação</span><input id="input_numero_identificacao" type="number" placeholder="002032"></label>
+          </div>
+        </div>
+        <div class="infosCad">
+          <h3>Detalhes Técnicos</h3>
+          <div class="inputs">
+            <label class="w-50"><span>Sistema Operacional</span><input id="input_sistema_operacional" type="text" placeholder="Ubuntu 22.04"></label>
+            <label class="w-50"><span>Endereço de IPV4</span><input id="input_endereco_ipv4" type="text" placeholder="10.0.1.10"></label>
+          </div>
+        </div>
+        <div class="acoesModal">
+          <button class="btn-branco" onclick="cancerCadServidor()">Cancelar</button>
+          <button class="btn-azul" onclick="cadastrarServidor()">Cadastrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Remover Servidor -->
+  <div class="fundoModal" id="modalRemoverServidor">
+    <div class="modal removerModal">
+      <header>
+        <div>
+          <h2>Remover Servidor</h2>
+          <span class="subTitulo" id="modal_remover_servidor">Remover Servidor: SRV-PROD-01</span>
+        </div>
+      </header>
+      <div class="conteudo-remover">
+        <p>Tem certeza de que deseja remover este servidor?</p>
+        <p>Essa ação é permanente e não poderá ser desfeita. Todos os dados relacionados serão excluídos definitivamente.</p>
+        <p>Se tiver certeza, confirme em "Remover". Caso contrário, cancele para evitar perda de informações.</p>
+        <div class="acoesModal">
+          <button class="btn-branco" onclick="fecharModal(1)">Cancelar</button>
+          <button class="btn-vermelho" onclick="removerServidor()">Remover</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </body>
 
 </html>
+<!-- Scripts Funcionais -->
+<script src="../assets/javascript/datetime.js"></script>
+<script src="../assets/javascript/menu.js"></script>
+<script src="../assets/javascript/sessao.js"></script>
+
+<script type="module">
+  import { listarServidor, criarGraficos, buscarServidorPorNome, detalhesServidor } from "../assets/javascript/servidor.js"
+  listarServidor()
+  criarGraficos()
+  detalhesServidor(0)
+
+  const inputBusca = document.getElementById('input_busca_por_nome')
+  if (inputBusca) {
+    inputBusca.addEventListener('input', function () {
+      buscarServidorPorNome(this.value.toLowerCase())
+    })
+  }
+</script>
 
 <script>
-    usuarionome.innerHTML = sessionStorage.NOME_USUARIO
-    usuarioemail.innerHTML = sessionStorage.EMAIL_USUARIO
+function fecharModal(tipoModal) {
+  const modal = document.getElementsByClassName("fundoModal")
+  modal[tipoModal].style.display = 'none';
+}
+function adicionarServidor() {
+  document.getElementById("modalAdicionarServidor").style.display = 'flex'
+}
+function cancerCadServidor() {
+  input_nome_identificacao.value = ''
+  input_numero_identificacao.value = ''
+  input_sistema_operacional.value = ''
+  input_endereco_ipv4.value = ''
+  fecharModal(0)
+}
+function cadastrarServidor() {
+  var servidorNomeVar = input_nome_identificacao.value.trim()
+  var servidorIdentificacaoVar = input_numero_identificacao.value.trim()
+  var servidorIpVar = input_endereco_ipv4.value.trim()
+  var servidorSoVar = input_sistema_operacional.value.trim()
+  var idEmpresaVar = sessionStorage.FKEMPRESA;
+  var servidorStatusVar = 'Ativo'
+  if (!servidorNomeVar || !servidorIdentificacaoVar || !servidorIpVar || !servidorSoVar) {
+    mostrarErroDash("Preencha todos os campos CORRETAMENTE para finalizar o cadastro do servidor!")
+    return;
+  }
+  fetch("/servidores/cadastrarServidor", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ servidorNome: servidorNomeVar, servidorIdentificacao: servidorIdentificacaoVar, servidorIp: servidorIpVar, servidorSo: servidorSoVar, idEmpresaServer: idEmpresaVar, servidorStatus: servidorStatusVar })
+  }).then(function (resposta) {
+    if (resposta.ok) {
+      cancerCadServidor();
+      mostrarSucessoDash("Servidor cadastrado com sucesso!")
+      setTimeout(function () { window.location.reload() }, 2500);
+    } else {
+      mostrarErroDash("Erro ao cadastrar servidor!")
+      throw "Erro de cadastro de servidor";
+    }
+  }).catch(function (resposta) { console.log('#Erro: ' + resposta); })
+  return false;
+}
 
+function redirecionar() {
+  mostrarErroDash("Funcionalidade em desenvolvimento.");
+}
+
+function filtrarStatus(status) {
+  const select = document.getElementById('filtroStatus')
+  if (select) { select.value = status }
+}
+
+// Faixa de alertas toggle
+function toggleFaixaAlertas() {
+  const lista = document.getElementById('faixaAlertasLista')
+  const btn = document.getElementById('faixaAlertasToggle')
+  const faixa = document.getElementById('faixaAlertas')
+  if (lista.classList.contains('collapsed')) {
+    lista.classList.remove('collapsed')
+    btn.textContent = '▲ Ocultar'
+    faixa.classList.remove('faixa-collapsed')
+  } else {
+    lista.classList.add('collapsed')
+    btn.textContent = '▼ Mostrar'
+    faixa.classList.add('faixa-collapsed')
+  }
+}
+
+function toggleMetrica(metrica, btn) {
+  const chart = Chart.getChart('perfomaInfra')
+  if (!chart) return
+  const mapaMetrica = { ram: 0, cpu: 1, disco: 2, processos: 3 }
+  const idx = mapaMetrica[metrica]
+  if (idx == undefined) return
+  const ds = chart.data.datasets[idx]
+  ds.hidden = !ds.hidden
+  btn.classList.toggle('ativo')
+  chart.update()
+}
+
+const btnVerMais = document.getElementById('btnVerMais');
+const tabela = document.getElementById('tabelaServidores');
+let mostrandoMais = false;
+btnVerMais.addEventListener('click', () => {
+  mostrandoMais = !mostrandoMais;
+  tabela.classList.toggle('ocultar-extra');
+  btnVerMais.textContent = mostrandoMais ? 'Ver menos' : 'Ver mais';
+});
 </script>

@@ -21,4 +21,37 @@ router.patch("/finalizarCadastro", function (req, res) {
     usuarioController.finalizarCadastro(req, res);
 });
 
+// router.get("/listarColaboradores", function(req, res){
+//     usuarioController.listarColaboradores(req, res);
+// });
+
+router.get("/listarColaboradoresCadastrados", function(req, res){
+    usuarioController.listarColaboradoresCadastrados(req, res);
+});
+
+router.post("/cadastrarColaborador", function(req, res){
+    usuarioController.cadastrarColaborador(req, res);
+});
+
+
+router.get("/listarColaboradoresEmpresa/:idEmpresa", function(req, res){
+    usuarioController.listarColaboradoresEmpresa(req, res)
+})
+
+router.post("/alterarStatusColaborador", function(req, res){
+    usuarioController.alterarStatusUsuario(req, res)
+})
+
+router.get("/buscarUsuarioPorId/:idUsuario", function(req, res){
+    usuarioController.buscarUsuarioPorId(req, res)
+})
+
+router.post("/alterarDadosPerfil", function(req, res){
+    usuarioController.alterarDadosPerfil(req, res)
+})
+
+router.post("/atualizarDadosContribuidor", function(req, res){
+    usuarioController.atualizarDadosContribuidor(req, res)
+})
+
 module.exports = router;
